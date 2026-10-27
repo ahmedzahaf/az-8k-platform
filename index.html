@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AZ-8K | منصة الوسائط الفائقة 8K Ultra HD</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- Header & Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <div class="bg-gradient-to-r from-emerald-500 to-teal-400 p-2 rounded-xl text-slate-950 font-black shadow-lg">
+          AZ
+        </div>
+        <span class="text-xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-emerald-400">
+          AZ-8K
+        </span>
+      </div>
+      <button class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-sm transition shadow-lg">
+        رفع محتوى
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative h-[70vh] min-h-[500px] flex items-center justify-center pt-16 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/80 to-slate-950 z-10"></div>
+    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-30 scale-105"></div>
+
+    <div class="relative z-20 max-w-4xl w-full px-4 text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold mb-6 backdrop-blur-md">
+        <i data-lucide="sparkles" class="w-4 h-4"></i> منصة الميديا الأولى بدقة 8K فائقة الوضوح
+      </div>
+      <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-6 leading-tight">
+        أفضل الصور والفيديوهات المجانية بجودة <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">8K Ultra HD</span>
+      </h1>
+
+      <div class="relative max-w-2xl mx-auto shadow-2xl">
+        <input 
+          type="text" 
+          placeholder="ابحث عن فيديوهات 8K، صحراء، مناظر طبيعية سينمائية..." 
+          className="w-full h-16 pr-14 pl-4 rounded-2xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 backdrop-blur-xl text-base font-medium w-full h-16 pr-14 pl-4 rounded-2xl"
+          style="background-color: rgba(15, 23, 42, 0.9);"
+        />
+        <i data-lucide="search" class="absolute right-5 top-5 text-emerald-400 w-6 h-6"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- Media Grid -->
+  <main class="max-w-7xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Card 1 -->
+      <div onclick="openModal('كثبان صحراوية ذهبية بدقة 8K', 'Ahmed Zahaf', 'AZ', 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=1200&q=80')" class="relative group overflow-hidden rounded-2xl bg-slate-900 border border-slate-800/80 shadow-xl cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=1200&q=80" alt="AZ-8K Media" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+        <div class="absolute top-3 left-3 flex gap-2">
+          <div class="bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700/50 flex items-center gap-1.5 text-[10px] font-black text-emerald-400">
+            <i data-lucide="video" class="w-3 h-3"></i> 8K ULTRA HD
+          </div>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-between">
+          <div class="flex justify-end"><i data-lucide="heart" class="text-white w-5 h-5"></i></div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-slate-950 font-black text-xs">AZ</div>
+              <span class="text-xs font-bold text-slate-200">Ahmed Zahaf</span>
+            </div>
+            <button class="px-3.5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs flex items-center gap-1.5">
+              <i data-lucide="download" class="w-4 h-4"></i> تنزيل
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Native Ad Placeholder -->
+      <div class="rounded-2xl bg-slate-900/60 border border-slate-800/80 p-6 flex flex-col items-center justify-center text-center h-64 relative overflow-hidden">
+        <span class="absolute top-3 right-3 text-[10px] uppercase text-slate-500 font-bold bg-slate-950/50 px-2 py-0.5 rounded">إعلان ممول</span>
+        <i data-lucide="sparkles" class="w-8 h-8 text-emerald-400 mb-4"></i>
+        <h3 class="text-base font-bold text-white mb-2">ترقية إلى عضوية AZ-8K VIP</h3>
+        <p class="text-xs text-slate-400 mb-4">تحميل سريع وبدون إعلانات</p>
+        <button class="w-full py-2.5 rounded-xl bg-slate-800 text-emerald-400 text-xs font-bold border border-slate-700">استكشف باقات VIP</button>
+      </div>
+
+      <!-- Card 2 -->
+      <div onclick="openModal('غروب الشمس السينمائي في الصحراء', 'Sahara Creative', 'SC', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80')" class="relative group overflow-hidden rounded-2xl bg-slate-900 border border-slate-800/80 shadow-xl cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="AZ-8K Media" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+        <div class="absolute top-3 left-3 flex gap-2">
+          <div class="bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700/50 flex items-center gap-1.5 text-[10px] font-black text-emerald-400">
+            <i data-lucide="image" class="w-3 h-3"></i> 8K ULTRA HD
+          </div>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-between">
+          <div class="flex justify-end"><i data-lucide="heart" class="text-white w-5 h-5"></i></div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-slate-950 font-black text-xs">SC</div>
+              <span class="text-xs font-bold text-slate-200">Sahara Creative</span>
+            </div>
+            <button class="px-3.5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs flex items-center gap-1.5">
+              <i data-lucide="download" class="w-4 h-4"></i> تنزيل
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Download Modal -->
+  <div id="downloadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xl">
+    <div class="relative w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl p-6">
+      <button onclick="closeModal()" class="absolute top-4 left-4 p-2 rounded-full bg-slate-950 text-slate-400">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <h3 id="modalTitle" class="text-lg font-bold text-white mb-4">تحميل المحتوى</h3>
+      <div id="modalImageContainer" class="mb-4 rounded-xl overflow-hidden h-48 bg-slate-950 flex items-center justify-center">
+        <img id="modalImg" src="" class="h-full object-contain">
+      </div>
+      <div class="space-y-2">
+        <button onclick="triggerDownload('8K Original')" class="w-full p-3 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-right text-xs font-bold text-white flex justify-between items-center">
+          <span>8K Original (7680x4320)</span>
+          <i data-lucide="download" class="w-4 h-4 text-emerald-400"></i>
+        </button>
+        <button onclick="triggerDownload('4K Ultra HD')" class="w-full p-3 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-right text-xs font-bold text-white flex justify-between items-center">
+          <span>4K Ultra HD (3840x2160)</span>
+          <i data-lucide="download" class="w-4 h-4 text-emerald-400"></i>
+        </button>
+      </div>
+      <div id="downloadNotice" class="hidden mt-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-xs font-bold flex items-center gap-2">
+        <i data-lucide="check-circle-2" class="w-4 h-4"></i> جاري بدء التحميل...
+      </div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    function openModal(title, author, avatar, src) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalImg').src = src;
+      document.getElementById('downloadModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('downloadModal').classList.add('hidden');
+      document.getElementById('downloadNotice').classList.add('hidden');
+    }
+
+    function triggerDownload(res) {
+      const notice = document.getElementById('downloadNotice');
+      notice.classList.remove('hidden');
+      notice.innerText = 'جاري بدء تحميل دقة ' + res + '...';
+      setTimeout(() => {
+        closeModal();
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
