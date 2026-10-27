@@ -1,679 +1,497 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Freepik - تصميم ووسائط رقمية للجميع</title>
-
-  <!-- Font Awesome للأيقونات -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- خط Cairo من Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    /* --- المتغيرات والتنسيقات الأساسية --- */
-    :root {
-      --bg-dark: #0f1115;
-      --bg-card: #181b20;
-      --primary-blue: #1254ff;
-      --primary-hover: #003ed9;
-      --accent-gold: #ffb800;
-      --text-main: #ffffff;
-      --text-muted: #9ca3af;
-      --border-color: rgba(255, 255, 255, 0.1);
-      --font-base: 'Cairo', sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-base);
-      direction: rtl;
-      overflow-x: hidden;
-    }
-
-    /* --- الهيدر وشريط التنقل (Navbar) --- */
-    .navbar {
-      background-color: rgba(15, 17, 21, 0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .nav-container {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 0.8rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-      color: var(--text-main);
-      font-size: 1.6rem;
-      font-weight: 900;
-    }
-
-    .logo-icon {
-      color: var(--primary-blue);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.2rem;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-
-    .nav-links a.active, .nav-links a:hover {
-      color: var(--text-main);
-    }
-
-    .badge {
-      background-color: var(--primary-blue);
-      color: #fff;
-      font-size: 0.65rem;
-      padding: 0.1rem 0.5rem;
-      border-radius: 10px;
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .icon-btn {
-      background: transparent;
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.2s;
-    }
-
-    .icon-btn:hover {
-      background: var(--bg-card);
-    }
-
-    .btn-text {
-      color: var(--text-main);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
-
-    .btn-primary {
-      background-color: var(--primary-blue);
-      color: #fff;
-      text-decoration: none;
-      padding: 0.6rem 1.4rem;
-      border-radius: 8px;
-      font-weight: 700;
-      transition: background 0.2s;
-    }
-
-    .btn-primary:hover {
-      background-color: var(--primary-hover);
-    }
-
-    /* --- قسم البطل (Hero Section) --- */
-    .hero {
-      padding: 5rem 1.5rem 3rem;
-      text-align: center;
-      background: radial-gradient(circle at 50% 0%, rgba(18, 84, 255, 0.15), transparent 70%);
-    }
-
-    .hero-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .hero-title {
-      font-size: 2.8rem;
-      font-weight: 900;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-
-    .hero-subtitle {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      margin-bottom: 2.5rem;
-    }
-
-    /* --- شريط البحث المطور --- */
-    .search-container {
-      display: flex;
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 0.4rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    }
-
-    .search-filter {
-      position: relative;
-      border-left: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-    }
-
-    .search-filter select {
-      background: transparent;
-      border: none;
-      color: var(--text-main);
-      font-family: var(--font-base);
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 0.8rem 1.5rem 0.8rem 2.5rem;
-      appearance: none;
-      cursor: pointer;
-      outline: none;
-    }
-
-    .select-icon {
-      position: absolute;
-      left: 1rem;
-      color: var(--text-muted);
-      pointer-events: none;
-      font-size: 0.8rem;
-    }
-
-    .search-input-wrap {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      padding: 0 1rem;
-    }
-
-    .search-icon {
-      color: var(--text-muted);
-      margin-left: 0.8rem;
-    }
-
-    .search-input-wrap input {
-      width: 100%;
-      background: transparent;
-      border: none;
-      color: var(--text-main);
-      font-family: var(--font-base);
-      font-size: 1rem;
-      outline: none;
-    }
-
-    .search-submit {
-      background-color: var(--primary-blue);
-      color: white;
-      border: none;
-      padding: 0.8rem 2rem;
-      border-radius: 8px;
-      font-family: var(--font-base);
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .search-submit:hover {
-      background-color: var(--primary-hover);
-    }
-
-    /* --- الفئات السريعة --- */
-    .quick-tags {
-      margin-top: 1.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-
-    .tags-label {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    .tag {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      background-color: rgba(255, 255, 255, 0.04);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      border: 1px solid var(--border-color);
-      transition: all 0.2s;
-    }
-
-    .tag:hover {
-      color: var(--text-main);
-      border-color: var(--text-muted);
-    }
-
-    /* --- معرض الصور والشبكة --- */
-    .gallery-section {
-      max-width: 1440px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-    }
-
-    .gallery-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .gallery-filter-buttons {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .filter-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      color: var(--text-muted);
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-family: var(--font-base);
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--primary-blue);
-      color: white;
-      border-color: var(--primary-blue);
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .gallery-item {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      height: 280px;
-      background-color: var(--bg-card);
-      cursor: pointer;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
-
-    .item-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding: 1rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .gallery-item:hover .item-overlay {
-      opacity: 1;
-    }
-
-    .badge-premium {
-      background: rgba(0, 0, 0, 0.6);
-      color: var(--accent-gold);
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-
-    .badge-free {
-      background: rgba(0, 0, 0, 0.6);
-      color: #10b981;
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-
-    /* --- النافذة المنبثقة (Modal) --- */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    .modal.open {
-      display: flex;
-    }
-
-    .modal-content {
-      background: var(--bg-card);
-      border-radius: 16px;
-      max-width: 900px;
-      width: 100%;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      background: rgba(0, 0, 0, 0.5);
-      border: none;
-      color: white;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .modal-body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .modal-image-container {
-      max-height: 500px;
-      overflow: hidden;
-      background: #000;
-      display: flex;
-      justify-content: center;
-    }
-
-    .modal-image-container img {
-      max-width: 100%;
-      max-height: 500px;
-      object-fit: contain;
-    }
-
-    .modal-details {
-      padding: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-author {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 0.3rem;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .download-btn {
-      background: var(--primary-blue);
-      color: white;
-      border: none;
-      padding: 0.8rem 1.6rem;
-      border-radius: 8px;
-      font-family: var(--font-base);
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .like-btn-large {
-      background: transparent;
-      border: 1px solid var(--border-color);
-      color: white;
-      width: 45px;
-      height: 45px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.2rem;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Pixora: free high quality stock images, illustrations, vectors, videos and music, shared by a creative community.">
+<meta name="robots" content="index,follow"><meta name="theme-color" content="#191b26"><meta name="color-scheme" content="light dark"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' rx='10' fill='%230b7f5c'/%3E%3Ccircle cx='17' cy='17' r='8' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Ccircle cx='17' cy='17' r='2.6' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:type" content="website"><meta property="og:title" content="Pixora: free stock images, videos and music"><meta property="og:description" content="Stunning royalty-free images and media for any project."><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Pixora","description":"Free stock images, videos and music","inLanguage":["en","es","de","fr","it","pt","ar"]}</script>
+<title>Pixora – Free stock images, videos & music</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--fg:#191b26;--mute:#6b6f7b;--line:#e8e9ee;--chip:#f5f5f7;--green:#0b7f5c;--greent:#0b7f5c;--amber:#f5a524;--dark:#191b26;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12141c;--fg:#f1f2f6;--mute:#a0a4b0;--line:#2a2d3a;--chip:#1e212c;--dark:#000;--greent:#3ddc9e}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font-family:'Instrument Sans',system-ui,Arial,sans-serif;background:var(--bg);color:var(--fg);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid transparent}
+header .wrap{display:flex;align-items:center;gap:14px;height:72px}
+.logo{width:44px;height:44px;border-radius:6px;background:var(--dark);color:#fff;font-weight:700;font-size:22px;display:grid;place-items:center;letter-spacing:-1px;flex:none}
+.hsearch{flex:1;display:flex;align-items:center;gap:12px;background:var(--chip);border-radius:30px;height:44px;padding:0 16px;color:var(--mute);font-size:16px;min-width:0}
+.hsearch input{border:0;background:none;outline:0;font:inherit;color:var(--fg);width:100%}
+.join{border:1.5px solid var(--line);border-radius:30px;height:44px;padding:0 22px;font-weight:600;display:grid;place-items:center;font-size:17px;background:none;color:var(--fg);cursor:pointer;font-family:inherit}
+.burger{background:none;border:0;width:40px;height:40px;display:grid;place-content:center;gap:5px;cursor:pointer}
+.burger i{display:block;width:22px;height:2.5px;background:var(--fg);border-radius:2px}
+/* hero */
+.hero{position:relative;min-height:600px;color:#fff;background:linear-gradient(180deg,#8d7a50 0%,#6f6446 30%,#4a3a3f 60%,#2f2a45 80%,#5a2f3a 100%);overflow:hidden;margin-top:-72px;padding-top:72px;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:36px}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease}.slide.on{opacity:1}.slide svg{width:100%;height:100%;display:block}.slide.on svg,.slide.out svg{animation:kb 7s ease-out forwards}.hero{overflow:visible}.slide{overflow:hidden}@keyframes kb{from{transform:scale(1) translateX(0)}to{transform:scale(1.18) translateX(-3%)}}.hero:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.05) 40%,rgba(0,0,0,.45))}.hero .wrap{z-index:2}.hero .tabs,.hero .bigsearch{position:relative}
+.hero .wrap{position:relative;width:100%}
+.hero h1{font-size:clamp(34px,6vw,56px);line-height:1.3;font-weight:700;margin-bottom:34px;max-width:760px;text-shadow:0 2px 12px rgba(0,0,0,.25)}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:18px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;border:0;background:none;color:#fff;font:600 20px 'Instrument Sans',sans-serif;padding:14px 26px;border-radius:40px;cursor:pointer}
+.tabs button.on{background:#fff;color:var(--dark)}
+.bigsearch{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.28);backdrop-filter:blur(6px);border-radius:40px;height:76px;padding:0 28px;margin-bottom:22px;max-width:900px}
+.bigsearch input{flex:1;background:none;border:0;outline:0;color:#fff;font:400 20px 'Instrument Sans',sans-serif;min-width:0}
+.bigsearch input::placeholder{color:#f1ebe6}
+.chips{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;margin-bottom:60px}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;background:rgba(255,255,255,.2);padding:14px 26px;border-radius:14px;font-size:20px}
+.feat{display:flex;justify-content:space-between;align-items:center;font-size:20px;opacity:.95}
+.feat u{font-weight:400}
+.feat button{background:none;border:0;color:#fff;font-size:34px;cursor:pointer;padding:0 8px}
+.dots{display:flex;gap:12px;justify-content:center;margin-top:8px}
+.dots i{width:86px;max-width:28%;height:16px;border-radius:10px;background:rgba(255,255,255,.35)}
+.dots i.on{background:#fff}
+/* sections */
+section{padding:60px 0 20px}
+h2{font-size:clamp(28px,4.5vw,40px);font-weight:600;line-height:1.35}
+.assets{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(300px,76%);grid-template-rows:repeat(2,auto);gap:20px;overflow-x:auto;margin-top:34px;padding-bottom:6px;scrollbar-width:none}
+.assets::-webkit-scrollbar{display:none}
+.asset{border:1.5px solid var(--line);border-radius:28px;height:130px;display:flex;justify-content:space-between;overflow:hidden;position:relative}
+.asset div{padding:34px 0 0 36px}
+.asset b{display:block;font-size:26px;font-weight:600}
+.asset span{color:var(--mute);font-size:21px}
+.asset i{width:38%;margin-top:18px;border-radius:18px 0 0 0;transform:skewY(-5deg);transform-origin:left bottom;display:block}
+.statement{margin-top:90px;max-width:780px}
+.hero2{margin-top:34px;height:420px;border-radius:0;background:radial-gradient(circle at 55% 105%,#c58a4a 0,#6b3f1b 22%,#0a0a0f 52%),#05050a}
+/* collections */
+.tt{margin:40px 0 28px}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--chip);border-radius:40px;padding:8px;max-width:620px}
+.seg button{border:0;background:none;color:var(--mute);font:600 22px 'Instrument Sans',sans-serif;height:64px;border-radius:40px;cursor:pointer}
+.seg button.on{background:var(--bg);color:var(--fg)}
+.seg b{display:inline-block;width:14px;height:20px;background:var(--green);border-radius:2px 2px 0 0;margin-right:12px;vertical-align:-2px}
+.coll{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:30px 60px;margin-top:36px}
+.coll a{display:flex;gap:18px;align-items:center}
+.coll i{width:76px;height:76px;border-radius:16px;flex:none}
+.coll b{display:block;font-size:24px;font-weight:600}
+.coll span{color:var(--mute);font-size:20px}
+.new{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(300px,76%);gap:20px;overflow-x:auto;margin-top:34px;scrollbar-width:none}
+.new::-webkit-scrollbar{display:none}
+.new i{display:block;height:300px;border-radius:20px}
+.new span{display:inline-block;background:var(--chip);color:var(--mute);padding:14px 26px;border-radius:20px 20px 0 0;margin-top:20px;font-size:20px}
+/* upload */
+.up{border:1.5px solid var(--line);border-radius:28px;padding:40px 36px;margin:70px 0 80px}
+.up h3{font-size:30px;font-weight:600;margin-bottom:12px}
+.up p{color:var(--mute);font-size:19px;margin-bottom:30px;max-width:560px;line-height:1.5}
+.btn{display:flex;align-items:center;justify-content:center;gap:14px;background:var(--green);color:#fff;border:0;border-radius:40px;height:64px;width:100%;max-width:560px;font:600 24px 'Instrument Sans',sans-serif;cursor:pointer}
+/* footer */
+footer{border-top:1px solid var(--line);padding:70px 0 50px}
+.flogo{font-size:56px;font-weight:700;letter-spacing:-2px}
+footer p.d{color:var(--mute);font-size:22px;line-height:1.5;margin:26px 0;max-width:560px}
+.soc{display:flex;gap:26px;margin-bottom:36px;flex-wrap:wrap}
+.soc a{width:38px;height:38px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:15px}
+details{border-top:1.5px solid var(--line);padding:30px 0}
+summary{list-style:none;font-size:26px;font-weight:600;display:flex;justify-content:space-between;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"\2335";transform:rotate(180deg);font-size:18px;color:var(--mute);transition:transform .2s}
+details[open] summary:after{transform:none;color:var(--fg)}
+details a{display:block;color:var(--mute);font-size:24px;margin-top:22px}
+.live{background:var(--chip);color:var(--fg);font-size:20px;font-weight:600;padding:8px 14px;border-radius:10px;margin-left:10px}
+.live:before{content:"";display:inline-block;width:20px;height:20px;border-radius:50%;background:#e0605f;margin-right:10px;vertical-align:-3px}
+.copy{color:var(--mute);margin-top:30px;font-size:16px}
+@media (min-width:800px){.assets{grid-auto-columns:minmax(320px,340px)}.new{grid-auto-columns:minmax(300px,360px)}}
+@media (max-width:480px){.hero{min-height:640px}.bigsearch{height:68px}}
+header{transition:background .3s,border-color .3s}header:not(.solid){background:transparent}header:not(.solid) .hsearch{opacity:0;pointer-events:none}header:not(.solid) .burger i{background:#fff}header:not(.solid) .join{color:#fff;border-color:rgba(255,255,255,.65)}header:not(.solid) .logo{background:#fff;color:#191b26}header.solid{border-bottom-color:var(--line)}.hsearch{transition:opacity .3s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:50px 0 70px;text-align:center}.stats b{display:block;font-size:clamp(26px,5vw,52px);font-weight:700;color:var(--green)}.stats span{color:var(--mute);font-size:clamp(13px,2vw,19px)}
+.filters{display:flex;gap:10px;overflow-x:auto;margin:26px 0;scrollbar-width:none}.filters button{flex:none;border:1.5px solid var(--line);background:none;color:var(--fg);font:600 18px 'Instrument Sans',sans-serif;padding:10px 24px;border-radius:30px;cursor:pointer;transition:.2s}.filters button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.masonry{columns:2 150px;column-gap:14px}@media(min-width:800px){.masonry{columns:4}}.tile{break-inside:avoid;margin-bottom:14px;border-radius:16px;position:relative;overflow:hidden;cursor:pointer;display:block;width:100%;border:0;padding:0;text-align:left;transition:transform .25s}.tile:hover{transform:translateY(-3px)}.tile .ov{position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.7));opacity:0;transition:opacity .25s;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;font-size:15px}.tile:hover .ov,.tile:focus-visible .ov{opacity:1}@media(hover:none){.tile .ov{opacity:1}}.tile.hide{display:none}.ov b{font-size:17px}
+.sugg{position:absolute;left:0;right:0;top:calc(100% + 8px);background:var(--bg);color:var(--fg);border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,.28);overflow:hidden;display:none;z-index:30}.sugg.on{display:block}.sugg a{display:block;padding:15px 28px;font-size:19px}.sugg a:hover{background:var(--chip)}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}.lb.on{display:flex}.lbc{background:var(--bg);border-radius:24px;max-width:860px;width:100%;overflow:hidden;display:grid;grid-template-columns:1.4fr 1fr}.lbi{min-height:380px}.lbm{padding:28px;display:flex;flex-direction:column;gap:14px;justify-content:center}.lbm b{font-size:26px}.lbm span{color:var(--mute)}.lbm .btn{height:54px;font-size:19px}.lbm .join{width:100%}@media(max-width:640px){.lbc{grid-template-columns:1fr}.lbi{min-height:240px}}
+:root[data-theme="dark"]{--bg:#12141c;--fg:#f1f2f6;--mute:#a0a4b0;--line:#2a2d3a;--chip:#1e212c;--dark:#000;--greent:#3ddc9e}
+.tile.fav:after{content:"\2665";position:absolute;top:10px;right:12px;color:#fff;font-size:22px;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--fg);color:var(--bg);padding:14px 26px;border-radius:30px;font-weight:600;opacity:0;pointer-events:none;transition:.3s;z-index:90}.toast.on{opacity:1;transform:translate(-50%,0)}
+.res{position:fixed;inset:0;background:var(--bg);z-index:40;overflow:auto;display:none;padding:env(safe-area-inset-top,0px) 0 40px}.res.on{display:block}.rh{display:flex;gap:12px;align-items:center;height:72px}.rc{color:var(--mute);font-size:18px;margin:10px 0 26px}.res h2{margin-top:12px}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(340px,86%);background:var(--bg);z-index:60;transform:translateX(105%);transition:transform .3s;padding:calc(24px + env(safe-area-inset-top,0px)) 26px 30px;display:flex;flex-direction:column;gap:6px;box-shadow:-10px 0 40px rgba(0,0,0,.3)}.drawer.on{transform:none}.drawer a,.drawer button.mi{font:600 22px 'Instrument Sans',sans-serif;padding:14px 4px;border:0;background:none;color:var(--fg);text-align:left;cursor:pointer;border-bottom:1px solid var(--line)}.dbk{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:55;display:none}.dbk.on{display:block}
+.in{width:100%;height:54px;border:1.5px solid var(--line);border-radius:30px;padding:0 22px;font:400 18px 'Instrument Sans',sans-serif;background:var(--bg);color:var(--fg)}.err{color:#d6453d;font-size:15px;min-height:20px}.lbm .seg button{height:46px;font-size:17px}.lbm .seg{padding:5px}
+[dir=rtl] *{font-family:'Cairo','Instrument Sans',system-ui,sans-serif!important}[dir=rtl] .asset div{padding:34px 36px 0 0}[dir=rtl] .asset i{border-radius:0 18px 0 0;transform:skewY(5deg);transform-origin:right bottom}[dir=rtl] .tile{text-align:right}[dir=rtl] .tile.fav:after{right:auto;left:12px}[dir=rtl] .drawer{right:auto;left:0;transform:translateX(-105%);box-shadow:10px 0 40px rgba(0,0,0,.3)}[dir=rtl] .drawer.on{transform:none}[dir=rtl] .drawer a,[dir=rtl] .drawer button.mi{text-align:right}[dir=rtl] .seg b{margin:0 0 0 12px}[dir=rtl] .live{margin:0 10px 0 0}[dir=rtl] .live:before{margin:0 0 0 10px}[dir=rtl] .flogo,[dir=rtl] .logo{direction:ltr}[dir=rtl] .hero h1{line-height:1.5}
+:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+</style>
+<style id="pro">
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--green);color:#fff}
+.skip{position:absolute;left:12px;top:-64px;background:var(--green);color:#fff;padding:10px 18px;border-radius:10px;z-index:100;font-weight:600}.skip:focus{top:12px}
+main:focus{outline:0}
+header .wrap{height:68px}
+header .logo,header:not(.solid) .logo{width:auto;height:auto;background:none;color:var(--fg);display:flex;align-items:center;gap:10px;font-size:24px;letter-spacing:-.7px;border-radius:0}
+header:not(.solid) .logo{color:#fff}
+.logo svg{flex:none;display:block}
+.mnav{display:none;gap:2px;margin-inline-start:8px}
+@media(min-width:1000px){.mnav{display:flex}}
+.mnav a{padding:9px 14px;border-radius:20px;font-weight:600;font-size:15px;transition:background .2s}
+header:not(.solid) .mnav a{color:#fff}
+.mnav a:hover{background:rgba(127,127,127,.18)}
+header:not(.solid) .hsearch{visibility:hidden}
+header.solid{background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.join{height:42px;font-size:15px;padding:0 20px;transition:background .2s}.join:hover{background:rgba(127,127,127,.14)}
+.hsearch{height:42px;font-size:15px}
+.hero{min-height:660px}
+.hero h1{font-size:clamp(32px,5.2vw,60px);letter-spacing:-.025em;line-height:1.12;max-width:860px}
+.tabs button{font-size:clamp(15px,1.5vw,18px);padding:11px 22px;transition:background .2s}
+.tabs button:not(.on):hover{background:rgba(255,255,255,.18)}
+.bigsearch{height:64px;max-width:820px;padding:0 24px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.36)}
+.bigsearch input{font-size:clamp(16px,1.5vw,19px)}
+.chips{margin-bottom:48px}.chips a{font-size:clamp(14px,1.3vw,16px);padding:10px 20px;border-radius:12px;transition:background .2s}.chips a:hover{background:rgba(255,255,255,.34)}
+.feat{font-size:clamp(14px,1.3vw,16px)}.dots i{height:6px;width:64px}
+section{padding:76px 0 24px}
+h2{font-size:clamp(26px,3.5vw,38px);letter-spacing:-.018em;line-height:1.25}
+.assets{grid-auto-flow:row;grid-template-columns:1fr;grid-template-rows:none;grid-auto-columns:auto;overflow:visible;gap:16px;margin-top:28px}
+@media(min-width:640px){.assets{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.assets{grid-template-columns:repeat(4,1fr)}}
+.asset{height:112px;border-radius:22px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.asset:hover{transform:translateY(-3px);border-color:var(--green);box-shadow:0 12px 28px rgba(0,0,0,.12)}
+.asset div{padding:26px 0 0 26px}[dir=rtl] .asset div{padding:26px 26px 0 0}
+.asset b{font-size:20px}.asset span{font-size:15px}
+.statement{margin-top:84px;font-size:clamp(24px,3.2vw,34px);line-height:1.35}
+.hero2{height:auto;margin-top:32px;background:none;display:grid;gap:14px;grid-template-columns:2fr 1fr 1fr;grid-template-rows:230px 230px}
+.hero2 .mt{border:0;padding:0;border-radius:22px;position:relative;overflow:hidden;cursor:pointer;color:#fff;text-align:left;transition:transform .35s,box-shadow .35s;background-size:cover;background-position:center bottom}
+.hero2 .mt:first-child{grid-row:1/3}
+.hero2 .mt:hover{transform:scale(1.015);box-shadow:0 16px 36px rgba(0,0,0,.28)}
+.hero2 .mt span{position:absolute;left:0;right:0;bottom:0;padding:44px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.62));font:600 16px 'Instrument Sans',sans-serif}
+[dir=rtl] .hero2 .mt{text-align:right}
+@media(max-width:700px){.hero2{grid-template-columns:1fr 1fr;grid-template-rows:210px 150px 150px}.hero2 .mt:first-child{grid-row:auto;grid-column:1/3}}
+.filters button{font-size:16px;padding:9px 22px;transition:background .2s,color .2s}
+.tile{border-radius:18px;box-shadow:0 1px 2px rgba(0,0,0,.08);background-size:cover;background-position:center}
+.tile:hover{box-shadow:0 16px 32px rgba(0,0,0,.24)}
+.stats{margin:56px 0 72px}
+.tt{margin:32px 0 24px}
+.seg{max-width:460px}.seg button{font-size:17px;height:50px}.seg b{width:11px;height:16px;margin-right:10px}
+.coll{grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px 40px;margin-top:30px}
+.coll a{transition:transform .25s}.coll a:hover{transform:translateX(4px)}[dir=rtl] .coll a:hover{transform:translateX(-4px)}
+.coll i{width:64px;height:64px;border-radius:14px}.coll b{font-size:18px}.coll span{font-size:15px}
+.new{grid-auto-columns:minmax(260px,76%)}
+@media(min-width:900px){.new{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);grid-auto-columns:auto;overflow:visible}}
+.new i{height:280px;border-radius:20px;transition:transform .3s}.new a:hover i{transform:translateY(-4px)}
+.new span{font-size:17px;padding:12px 22px;margin-top:16px}
+.up{padding:38px 36px;margin:72px 0 80px;border-radius:26px;background:linear-gradient(135deg,var(--chip),transparent 70%)}
+.up h3{font-size:26px}.up p{font-size:17px}
+.btn{height:54px;font-size:18px;max-width:420px;transition:filter .2s,transform .2s}.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.lbc{border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.lbi{background-size:cover;background-position:center}
+.lbm span#lbdim{font-size:14px;margin-top:-6px}
+footer{padding:64px 0 44px}
+.flogo{font-size:40px;letter-spacing:-1.4px}
+footer p.d{font-size:17px;margin:18px 0 22px}
+.soc{gap:12px;margin-bottom:28px}.soc a{width:38px;height:38px;transition:transform .2s}.soc a:hover{transform:translateY(-3px)}
+details{padding:22px 0}summary{font-size:19px}details a{font-size:17px;margin-top:14px;transition:color .2s}details a:hover{color:var(--fg)}
+@media(min-width:900px){footer .wrap{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:20px 56px;align-items:start}footer .fb{grid-row:1}details{border-top:0;padding:0}summary{pointer-events:none;margin-bottom:4px}summary:after{display:none}.copy{grid-column:1/-1;border-top:1px solid var(--line);padding-top:24px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+[hidden]{display:none!important}
+.tile .pb,.tile .yb{position:absolute;top:10px;left:10px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:12px}
+.tile .pb{background:rgba(0,0,0,.6);color:#fff}
+.tile .yb{background:var(--amber);color:#2a1d00;font-weight:700}
+[dir=rtl] .tile .pb,[dir=rtl] .tile .yb{left:auto;right:10px}
+.fbar{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+.fbar .filters{margin:0}
+.fr2{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.in.so{width:auto;height:42px;padding:0 16px;font-size:15px;border-radius:24px}
+.sws{display:flex;gap:8px;flex-wrap:wrap}
+.sw{width:30px;height:30px;border-radius:50%;border:2px solid var(--bg);box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw.on{box-shadow:0 0 0 3px var(--fg)}
+.lbm .tychip{align-self:flex-start;background:var(--chip);color:var(--fg);padding:4px 12px;border-radius:12px;font-size:13px;font-weight:600}
+.lbm .rl{font-weight:600;font-size:14px}
+.rel{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.rb{aspect-ratio:1;border:0;border-radius:12px;cursor:pointer;background-size:cover;background-position:center;padding:0;transition:transform .2s}.rb:hover{transform:scale(1.04)}
+.lbc{max-height:92vh;overflow:auto}
+.lbm .dn{font-size:14px;line-height:1.45}
+.upv{display:flex;gap:8px;flex-wrap:wrap}.upv img{width:64px;height:64px;object-fit:cover;border-radius:12px}
+.cookie p a,.stats b{color:var(--greent)}
+h1,h2,h3,.logo span,.flogo,.stats b{font-family:'Bricolage Grotesque','Instrument Sans',system-ui,sans-serif}
+.sugg a:focus-visible{background:var(--chip);outline-offset:-3px}
+</style>
 </head>
-<body>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><div class="wrap">
+ <a class="logo" href="#" aria-label="Pixora home"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><defs><linearGradient id="pxg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17c581"/><stop offset="1" stop-color="#0a7e55"/></linearGradient></defs><rect width="34" height="34" rx="10" fill="url(#pxg)"/><circle cx="17" cy="17" r="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="17" cy="17" r="2.6" fill="#fff"/></svg><span>pixora</span></a>
+ <nav class="mnav" aria-label="Main"><a href="#" data-s="photos">Photos</a><a href="#" data-s="illustrations">Illustrations</a><a href="#" data-s="vectors">Vectors</a><a href="#" data-s="videos">Videos</a><a href="#" data-s="music">Music</a></nav>
+ <label class="hsearch"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input placeholder="Search Pixora" aria-label="Search"></label>
+ <button class="join" id="joinb">Join</button>
+ <button class="burger" id="bg" aria-label="Menu"><i></i><i></i><i></i></button>
+</div></header>
 
-  <!-- Navigation Bar -->
-  <header class="navbar">
-    <div class="nav-container">
-      <div class="nav-right">
-        <a href="#" class="logo">
-          <i class="fa-solid fa-shapes logo-icon"></i>
-          <span class="logo-text">freepik</span>
-        </a>
-        <nav class="nav-links">
-          <a href="#" class="active">الكل</a>
-          <a href="#">الصور</a>
-          <a href="#">فيكتور</a>
-          <a href="#">توليد الذكاء الاصطناعي <span class="badge">جديد</span></a>
-          <a href="#">أيقونات</a>
-          <a href="#">قوالب PSD</a>
-        </nav>
-      </div>
-      <div class="nav-left">
-        <button class="icon-btn" title="المفضلة"><i class="fa-regular fa-heart"></i></button>
-        <a href="#" class="btn-text">تسجيل الدخول</a>
-        <a href="#" class="btn-primary">انضم مجاناً</a>
-      </div>
-    </div>
-  </header>
+<main id="main" tabindex="-1"><div class="hero">
+<div class="slide on"><svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8d7a50"/><stop offset="1" stop-color="#3a2f45"/></linearGradient></defs><rect width="400" height="700" fill="url(#g1)"/><g fill="#e0a22b"><circle cx="330" cy="60" r="70"/><circle cx="380" cy="150" r="60"/><circle cx="270" cy="130" r="45"/><circle cx="360" cy="20" r="50"/></g><g fill="#b9791f"><circle cx="300" cy="90" r="30"/><circle cx="385" cy="100" r="35"/></g><path d="M400 70Q320 120 230 170M360 130Q300 150 280 200" stroke="#1b1a25" stroke-width="7" fill="none"/><path d="M0 560Q120 480 260 540T400 520V700H0Z" fill="#6a3a3e"/><path d="M40 560l25-110 25 110zM90 570l20-90 20 90zM340 540l22-100 22 100z" fill="#2d2a44"/><path d="M0 620Q150 570 400 620V700H0Z" fill="#7a3b3e"/></svg></div>
+<div class="slide"><svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2d5a"/><stop offset="1" stop-color="#7a4a6a"/></linearGradient></defs><rect width="400" height="700" fill="url(#g2)"/><circle cx="290" cy="140" r="46" fill="#f3e3b8"/><circle cx="300" cy="132" r="46" fill="#2a2d5a" opacity=".35"/><g fill="#1f2147"><path d="M0 600l30-220 30 220zM50 610l35-260 35 260zM110 600l28-190 28 190zM250 610l32-240 32 240zM320 600l34-280 34 280z"/></g><g fill="#15173a"><path d="M-10 700l40-230 40 230zM80 700l32-200 32 200zM300 700l40-250 40 250zM370 700l30-210 30 210z"/></g><rect y="640" width="400" height="60" fill="#0e1030"/></svg></div>
+<div class="slide"><svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b4a8a"/><stop offset=".55" stop-color="#e0765a"/><stop offset="1" stop-color="#f3c26a"/></linearGradient></defs><rect width="400" height="700" fill="url(#g3)"/><circle cx="200" cy="430" r="60" fill="#fde3a0"/><path d="M0 470L80 380 150 450 240 360 330 450 400 400V520H0Z" fill="#5a3a6a"/><path d="M0 520L100 450 200 510 300 440 400 500V700H0Z" fill="#3a2a55"/><rect y="540" width="400" height="160" fill="#d9885a" opacity=".55"/><ellipse cx="200" cy="600" rx="50" ry="6" fill="#fde3a0" opacity=".6"/></svg></div>
+<div class="wrap">
+ <h1>Stunning royalty-free images &amp; media</h1>
+ <div class="tabs" role="tablist">
+  <button class="on">Explore</button><button>Photos</button><button>Illustrations</button><button>Vectors</button><button>Videos</button><button>Music</button>
+ </div>
+ <label class="bigsearch"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input placeholder="Search for free Images, Videos, Music &amp;…" aria-label="Search all assets"></label>
+ <div class="chips"><a href="#">nature</a><a href="#">background</a><a href="#">flowers</a><a href="#">sunset</a><a href="#">forest</a><a href="#">travel</a></div>
+ <div class="feat"><button id="prev" aria-label="Previous">&#8249;</button><span>Featured <u id="cap">Illustration by aalmeidah</u></span><button id="next" aria-label="Next">&#8250;</button></div>
+ <div class="dots" id="dots"><i class="on"></i><i></i><i></i></div>
+</div></div>
 
-  <!-- Hero Section & Search -->
-  <section class="hero">
-    <div class="hero-container">
-      <h1 class="hero-title">اصنع أفكارك الرائعة مع أسرع محرك للموارد الإبداعية</h1>
-      <p class="hero-subtitle">حمل ملايين الصور، الفيكتور، قوالب PSD، وأصول الذكاء الاصطناعي عالية الجودة</p>
+<section><div class="wrap">
+ <h2>Free assets for any project</h2>
+ <div class="assets">
+  <a class="asset" href="#"><div><b>Photos</b><span>4.4M assets</span></div><i style="background:radial-gradient(circle at 70% 45%,#e9b98b 0,#a9663a 25%,#0a0c12 60%)"></i></a>
+  <a class="asset" href="#"><div><b>Illustrations</b><span>1.2M assets</span></div><i style="background:linear-gradient(90deg,#9a8274,#cbbba7 50%,#8a6e66)"></i></a>
+  <a class="asset" href="#"><div><b>Vectors</b><span>170k assets</span></div><i style="background:linear-gradient(135deg,#3b6ea8,#e08a3a)"></i></a>
+  <a class="asset" href="#"><div><b>Videos</b><span>240k assets</span></div><i style="background:linear-gradient(135deg,#2a2d5a,#c4476b)"></i></a>
+ </div>
+ <h2 class="statement">Over 6.3 million+ high quality stock images, videos and music shared by our talented community.</h2>
+ <div class="hero2" id="mosaic"></div></div></section>
+<section><div class="wrap">
+ <h2>Editor's Choice</h2>
+ <div class="filters" id="filters"><button class="on" data-c="all">All</button><button data-c="Nature">Nature</button><button data-c="City">City</button><button data-c="People">People</button><button data-c="Food">Food</button></div>
+ <div class="masonry" id="mas"></div>
+ <div class="stats"><div><b data-n="6300000">0</b><span>Assets shared</span></div><div><b data-n="420000">0</b><span>Creators</span></div><div><b data-n="38">0</b><span>Million downloads / month</span></div></div>
+</div></section>
 
-      <!-- Search Box -->
-      <div class="search-container">
-        <div class="search-filter">
-          <select id="categorySelect">
-            <option value="all">كل الموارد</option>
-            <option value="vectors">فيكتور</option>
-            <option value="photos">صور</option>
-            <option value="psd">ملفات PSD</option>
-            <option value="ai">أصول AI</option>
-          </select>
-          <i class="fa-solid fa-chevron-down select-icon"></i>
-        </div>
-        <div class="search-input-wrap">
-          <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="searchInput" placeholder="ابحث عن جميع الموارد أو الأصول التجريدية..." autocomplete="off">
-        </div>
-        <button class="search-submit" id="searchBtn">
-          <span>بحث</span>
-        </button>
-      </div>
+<section><div class="wrap">
+ <h2>Curated Collections &amp; Playlists</h2>
+ <div class="tt"><div class="seg"><button class="on" id="b1"><b></b>Collections</button><button id="b2">&#9835;&nbsp; Playlists</button></div></div>
+ <div class="coll" id="list"></div>
 
-      <!-- Quick Tags -->
-      <div class="quick-tags">
-        <span class="tags-label">الأكثر بحثاً:</span>
-        <a href="#" class="tag">خلفيات رمضانية</a>
-        <a href="#" class="tag">شعارات احترافية</a>
-        <a href="#" class="tag">3D Render</a>
-        <a href="#" class="tag">تأثيرات نصوص</a>
-        <a href="#" class="tag">أنيميشن</a>
-      </div>
-    </div>
-  </section>
+ <h2 style="margin-top:90px">What's new on Pixora?</h2>
+ <div class="new">
+  <a href="#"><i style="background:radial-gradient(circle at 50% 55%,#7fc24a 0,#6a7a2a 14%,#59592a 35%,#3a3a1c 100%)"></i><span>Humans of Pixora</span></a>
+  <a href="#"><i style="background:linear-gradient(135deg,#d9c9b8,#3a2f2a 70%)"></i><span>Music &amp; Sound</span></a>
+  <a href="#"><i style="background:linear-gradient(135deg,#2f6f6a,#e6c36a)"></i><span>Contests</span></a>
+ </div>
 
-  <!-- Gallery Section -->
-  <main class="gallery-section">
-    <div class="gallery-header">
-      <h2>أحدث الموارد المضافة اليوم</h2>
-      <div class="gallery-filter-buttons">
-        <button class="filter-btn active" data-filter="all">الكل</button>
-        <button class="filter-btn" data-filter="free">مجاني</button>
-        <button class="filter-btn" data-filter="premium"><i class="fa-solid fa-crown"></i> ممتاز (Premium)</button>
-      </div>
-    </div>
+ <div class="up">
+  <h3>Share your creativity</h3>
+  <p>Upload your photos, videos and music, and get discovered by millions of people on the web and social media!</p>
+  <button class="btn"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M7 8l5-5 5 5M4 14v6h16v-6"/></svg>Upload</button>
+ </div>
+</div></section>
 
-    <!-- Dynamic Grid -->
-    <div class="gallery-grid" id="galleryGrid"></div>
-  </main>
+</main><div class="toast" id="toast" role="status"></div>
+<div class="dbk" id="dbk"></div>
+<nav class="drawer" id="dr"><a href="#" data-s="photos">Photos</a><a href="#" data-s="illustrations">Illustrations</a><a href="#" data-s="vectors">Vectors</a><a href="#" data-s="videos">Videos</a><a href="#" data-s="music">Music</a><button class="mi" id="th">Switch theme</button><button class="mi" id="lg">العربية</button><button class="mi" id="fv">My favorites</button></nav>
+<div class="res" id="res"><div class="wrap"><div class="rh"><button class="join" id="rx">&#8592; Back</button><label class="hsearch"><input id="rq" placeholder="Search Pixora" aria-label="Search"></label></div><h2 id="rt"></h2><p class="rc" id="rc"></p><div class="masonry" id="rm"></div></div></div>
+<div class="lb" id="jm" role="dialog" aria-modal="true"><div class="lbc" style="grid-template-columns:1fr;max-width:440px"><div class="lbm"><div class="seg"><button class="on" id="jt1">Join</button><button id="jt2">Log in</button></div><input class="in" id="ji1" type="email" placeholder="Email" autocomplete="email"><input class="in" id="ji2" type="password" placeholder="Password (8+ characters)" autocomplete="current-password"><div class="err" id="je"></div><button class="btn" id="js">Join for free</button><button class="join" id="jx">Cancel</button></div></div></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true"><div class="lbc"><div class="lbi" id="lbi"></div><div class="lbm"><b id="lbt"></b><span id="lbs"></span><select class="in" id="lbz" aria-label="Size"><option>Small</option><option selected>Medium</option><option>Large</option><option>Original</option></select><span id="lbdim">1280 × 1600 px</span><div class="tg" id="lbg"></div><button class="btn" id="lbd">Free download</button><button class="join" id="lbf">&#9825; Save</button><button class="join" id="lbx">Close</button></div></div></div>
+<footer><div class="wrap">
+ <div class="flogo">pixora</div>
+ <p class="d">Over 6.3 million+ high quality stock images, videos and music shared by our talented community.</p>
+ <div class="soc"><a href="#">Ig</a><a href="#">f</a><a href="#">Tk</a><a href="#">X</a><a href="#">in</a><a href="#">Yt</a><a href="#">P</a></div>
+ <details><summary>Discover</summary><a href="#">Editor's Choice</a><a href="#">Popular Images</a><a href="#">Free Videos</a><a href="#">Free Music</a></details>
+ <details open><summary>Community</summary><a href="#">Contests <span class="live">LIVE</span></a><a href="#">Creators</a><a href="#">Ambassadors</a><a href="#">Forum</a></details>
+ <details><summary>About</summary><a href="#">About us</a><a href="#">Blog</a><a href="#">Help Center</a><a href="#">Terms of Service</a></details>
+ <p class="copy">&copy; 2026 Pixora. All rights reserved.</p>
+</div></footer>
 
-  <!-- Modal Preview -->
-  <div class="modal" id="imageModal">
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-body">
-        <div class="modal-image-container">
-          <img id="modalImg" src="" alt="Preview">
-        </div>
-        <div class="modal-details">
-          <div>
-            <h3 id="modalTitle">عنوان التصميم</h3>
-            <p class="modal-author">بواسطة: <span id="modalAuthor">المصمم</span></p>
-          </div>
-          <div class="modal-actions">
-            <button class="download-btn"><i class="fa-solid fa-download"></i> تحميل مجاني</button>
-            <button class="like-btn-large"><i class="fa-regular fa-heart"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<script>
+var C={c:[["Halloween","187 items","linear-gradient(135deg,#7a2d1a,#e0803a)"],["Autumn / Fall","200 items","linear-gradient(135deg,#8a4a22,#4a2a14)"],["International Cat Day","250 items","linear-gradient(135deg,#d9d9d4,#6a8a4a)"],["Weddings","160 items","linear-gradient(135deg,#b08a5a,#4a6a3a)"],["Black &amp; White","210 items","linear-gradient(135deg,#222,#aaa)"],["Strawberries","140 items","linear-gradient(135deg,#c4252a,#2f6a2a)"]],
+p:[["Chill Vibes","48 tracks","linear-gradient(135deg,#3a4a8a,#8ab0e0)"],["Cinematic","52 tracks","linear-gradient(135deg,#222,#a0502a)"],["Acoustic Morning","36 tracks","linear-gradient(135deg,#d9b46a,#6a8a4a)"]]};
+function show(k){var l=document.getElementById('list');l.innerHTML=C[k].map(function(x){return '<a href="#"><i style="background:'+x[2]+'"></i><div><b>'+x[0]+'</b><span>'+x[1]+'</span></div></a>'}).join('');
+document.getElementById('b1').className=k=='c'?'on':'';document.getElementById('b2').className=k=='p'?'on':''}
+document.getElementById('b1').onclick=function(){show('c')};document.getElementById('b2').onclick=function(){show('p')};show('c');
+document.querySelectorAll('.tabs button').forEach(function(b){b.onclick=function(){document.querySelectorAll('.tabs button').forEach(function(x){x.className=''});b.className='on'}});
+var S=document.querySelectorAll('.slide'),DT=document.querySelectorAll('#dots i'),N=['Illustration by aalmeidah','Illustration by nightowl','Photo by lakeside'],cur=0,tm;
+function go(n){cur=(n+S.length)%S.length;S.forEach(function(s,i){var was=s.classList.contains('on');s.classList.remove('on');s.classList.remove('out');if(was&&i!=cur)s.classList.add('out');if(i==cur){void s.offsetWidth;s.classList.add('on')}});setTimeout(function(){S.forEach(function(s){s.classList.remove('out')})},1100);DT.forEach(function(d,i){d.className=i==cur?'on':''});document.getElementById('cap').textContent=N[cur];clearInterval(tm);tm=setInterval(function(){go(cur+1)},4500)}
+document.getElementById('prev').onclick=function(){go(cur-1)};document.getElementById('next').onclick=function(){go(cur+1)};DT.forEach(function(d,i){d.style.cursor='pointer';d.onclick=function(){go(i)}});go(0);
+var H=document.querySelector('header');function sc(){H.classList.toggle('solid',window.scrollY>80)}sc();window.addEventListener('scroll',sc,{passive:true});
+var T=[['Misty Valley','Nature',230,'#4a7a5a,#cfe3c0'],['Neon Crossing','City',300,'#2a2d5a,#e0457b'],['Golden Hour','People',260,'#c58a4a,#2a1a14'],['Berry Basket','Food',200,'#c4252a,#3a6a2a'],['Alpine Lake','Nature',320,'#2f6f8a,#e6d9b8'],['Old Town Roofs','City',220,'#8a5a3a,#d9b48a'],['Quiet Portrait','People',330,'#1a1a22,#b98a6a'],['Citrus Slice','Food',240,'#e0a22b,#6a8a2a'],['Pine Ridge','Nature',270,'#1f3a3a,#7ab0a0'],['Night Market','City',210,'#3a1a4a,#f0a040'],['Laughing Friends','People',290,'#d9788a,#f3d9a8'],['Fresh Pasta','Food',250,'#d9b46a,#8a3a2a']];
+var M=document.getElementById('mas');M.innerHTML=T.map(function(t,i){return '<button class="tile" data-i="'+i+'" data-c="'+t[1]+'" style="height:'+t[2]+'px;background:linear-gradient(160deg,'+t[3]+')"><span class="ov"><b>'+t[0]+'</b>'+t[1]+' &middot; '+(1200+i*377)+' likes</span></button>'}).join('');
+document.getElementById('filters').onclick=function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.className=''});b.className='on';M.querySelectorAll('.tile').forEach(function(t){t.classList.toggle('hide',b.dataset.c!='all'&&t.dataset.c!=b.dataset.c)})};
+var LB=document.getElementById('lb');M.onclick=function(e){var t=e.target.closest('.tile');if(!t)return;var d=T[t.dataset.i];document.getElementById('lbi').style.background='linear-gradient(160deg,'+d[3]+')';document.getElementById('lbt').textContent=d[0];document.getElementById('lbs').textContent=d[1]+' \u2022 Free for commercial use';LB.classList.add('on')};
+document.getElementById('lbx').onclick=function(){LB.classList.remove('on')};LB.onclick=function(e){if(e.target==LB)LB.classList.remove('on')};document.addEventListener('keydown',function(e){if(e.key=='Escape')LB.classList.remove('on')});
+var bs=document.querySelector('.bigsearch'),bi=bs.querySelector('input'),sg=document.createElement('div');sg.className='sugg';sg.innerHTML=['nature wallpaper','autumn forest','sunset beach','city night','flowers background'].map(function(s){return '<a href="#">'+s+'</a>'}).join('');bs.appendChild(sg);bi.onfocus=function(){sg.classList.add('on')};bi.onblur=function(){setTimeout(function(){sg.classList.remove('on')},180)};sg.onclick=function(e){var a=e.target.closest('a');if(a){e.preventDefault();bi.value=a.textContent}};
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);var el=e.target,n=+el.dataset.n,s=null;function f(ts){s=s||ts;var p=Math.min((ts-s)/1400,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3))).toLocaleString('en-US')+(p==1&&n==38?'+':'');if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)})},{threshold:.5});document.querySelectorAll('[data-n]').forEach(function(e){io.observe(e)});
+var Q=function(i){return document.getElementById(i)};var F=[];try{F=JSON.parse(localStorage.getItem('pxf')||'[]')}catch(e){}
+function sv(){try{localStorage.setItem('pxf',JSON.stringify(F))}catch(e){}}
+function mark(){document.querySelectorAll('.tile').forEach(function(t){t.classList.toggle('fav',F.indexOf(+t.dataset.i)>-1)})}
+function toast(m){var t=Q('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('on')},2200)}
+var ci=0;function openLB(i){ci=i;var d=T[i];Q('lbi').style.background='linear-gradient(160deg,'+d[3]+')';Q('lbt').textContent=d[0];Q('lbs').textContent=d[1]+' \u2022 Free for commercial use';Q('lbf').textContent=F.indexOf(i)>-1?'\u2665 Saved':'\u2661 Save';LB.classList.add('on')}
+function tc(e){var t=e.target.closest('.tile');if(t)openLB(+t.dataset.i)}M.onclick=tc;Q('rm').onclick=tc;mark();
+Q('lbf').onclick=function(){var k=F.indexOf(ci);if(k>-1){F.splice(k,1);toast('Removed from favorites')}else{F.push(ci);toast('Saved to favorites')}sv();mark();openLB(ci)};
+Q('lbd').onclick=function(){toast('Download started (demo)')};
+function render(ids,note,title){var out=[];for(var k=0;k<ids.length&&k<12;k++){var i=ids[k],t=T[i];out.push('<button class="tile" data-i="'+i+'" data-c="'+t[1]+'" style="height:'+t[2]+'px;background:linear-gradient(160deg,'+t[3]+')"><span class="ov"><b>'+t[0]+'</b>'+t[1]+'</span></button>')}Q('rm').innerHTML=out.join('')||'';Q('rt').textContent=title;Q('rc').textContent=note;mark();Q('res').classList.add('on');Q('res').scrollTop=0}
+function doSearch(q){q=(q||'').trim();var ws=q.toLowerCase().split(/\s+/).filter(function(w){return w.length>1}),m=[];T.forEach(function(t,i){var h=(t[0]+' '+t[1]).toLowerCase();if(ws.some(function(w){return h.indexOf(w)>-1}))m.push(i)});var all=T.map(function(t,i){return i});Q('rq').value=q;if(m.length)render(m,m.length+' matching assets',q?'Results for \u201c'+q+'\u201d':'Popular');else render(all,'No exact matches. Showing popular assets instead.',q?'Results for \u201c'+q+'\u201d':'Popular')}
+Q('rx').onclick=function(){Q('res').classList.remove('on')};Q('rq').onkeydown=function(e){if(e.key=='Enter')doSearch(this.value)};
+bi.onkeydown=function(e){if(e.key=='Enter')doSearch(this.value)};document.querySelector('.hsearch input').onkeydown=function(e){if(e.key=='Enter')doSearch(this.value)};sg.onclick=function(e){var a=e.target.closest('a');if(a){e.preventDefault();bi.value=a.textContent;doSearch(a.textContent)}};
+function dr(o){Q('dr').classList.toggle('on',o);Q('dbk').classList.toggle('on',o)}Q('bg').onclick=function(){dr(true)};Q('dbk').onclick=function(){dr(false)};
+Q('dr').onclick=function(e){var a=e.target.closest('a');if(a){e.preventDefault();dr(false);doSearch(a.dataset.s)}};
+Q('th').onclick=function(){var R=document.documentElement,d=(R.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))=='dark';R.dataset.theme=d?'light':'dark';dr(false)};
+Q('fv').onclick=function(){dr(false);if(!F.length){toast('No favorites yet. Open an image and tap Save.');return}render(F.slice(),F.length+' saved assets','My favorites')};
+var mode='join',JM=Q('jm');function jmode(m){mode=m;Q('jt1').className=m=='join'?'on':'';Q('jt2').className=m=='login'?'on':'';Q('js').textContent=m=='join'?'Join for free':'Log in';Q('ji2').setAttribute('autocomplete',m=='join'?'new-password':'current-password');Q('je').textContent=''}
+Q('joinb').onclick=function(){JM.classList.add('on')};Q('jx').onclick=function(){JM.classList.remove('on')};JM.onclick=function(e){if(e.target==JM)JM.classList.remove('on')};Q('jt1').onclick=function(){jmode('join')};Q('jt2').onclick=function(){jmode('login')};
+Q('js').onclick=function(){var e=Q('ji1').value.trim(),p=Q('ji2').value;if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){Q('je').textContent='Enter a valid email address.';return}if(p.length<8){Q('je').textContent='Password must be at least 8 characters.';return}JM.classList.remove('on');Q('joinb').textContent=e.charAt(0).toUpperCase();toast(mode=='join'?'Welcome to Pixora!':'Welcome back!')};
+document.addEventListener('keydown',function(e){if(e.key=='Escape'){JM.classList.remove('on');dr(false);Q('res').classList.remove('on');dc.classList.remove('on')}});
+var D={'Join':'انضم','Explore':'استكشف','Photos':'صور','Illustrations':'رسومات','Vectors':'متجهات','Videos':'فيديو','Music':'موسيقى','Stunning royalty-free images & media':'صور مذهلة وخامات مجانية بلا حقوق ملكية','nature':'طبيعة','background':'خلفيات','flowers':'زهور','sunset':'غروب','forest':'غابة','travel':'سفر','Featured':'مميز:','Free assets for any project':'أصول مجانية لأي مشروع','4.4M assets':'4.4 مليون ملف','1.2M assets':'1.2 مليون ملف','170k assets':'170 ألف ملف','240k assets':'240 ألف ملف','Over 6.3 million+ high quality stock images, videos and music shared by our talented community.':'أكثر من 6.3 مليون صورة وفيديو وموسيقى عالية الجودة يشاركها مجتمعنا المبدع.','Editor\'s Choice':'اختيار المحررين','All':'الكل','Nature':'طبيعة','City':'مدينة','People':'أشخاص','Food':'طعام','Assets shared':'ملف مشارك','Creators':'مبدعون','Million downloads / month':'مليون تحميل شهرياً','Curated Collections & Playlists':'مجموعات وقوائم تشغيل مختارة','Collections':'المجموعات','♫ Playlists':'♫ قوائم التشغيل','Halloween':'هالوين','Autumn / Fall':'الخريف','International Cat Day':'اليوم العالمي للقطط','Weddings':'أعراس','Black & White':'أبيض وأسود','Strawberries':'فراولة','Chill Vibes':'أجواء هادئة','Cinematic':'سينمائي','Acoustic Morning':'صباح أكوستيك','What\'s new on Pixora?':'ما الجديد في Pixora؟','Humans of Pixora':'بشر Pixora','Music & Sound':'موسيقى وأصوات','Contests':'المسابقات','LIVE':'مباشر','Share your creativity':'شارك إبداعك','Upload your photos, videos and music, and get discovered by millions of people on the web and social media!':'ارفع صورك وفيديوهاتك وموسيقاك ليكتشفك ملايين الأشخاص على الويب ووسائل التواصل!','Upload':'ارفع','Discover':'اكتشف','Community':'المجتمع','About':'حول','Popular Images':'الصور الشائعة','Free Videos':'فيديو مجاني','Free Music':'موسيقى مجانية','Ambassadors':'السفراء','Forum':'المنتدى','About us':'من نحن','Blog':'المدونة','Help Center':'مركز المساعدة','Terms of Service':'شروط الخدمة','© 2026 Pixora. All rights reserved.':'© 2026 Pixora. جميع الحقوق محفوظة.','Switch theme':'تبديل المظهر','My favorites':'مفضلتي','← Back':'رجوع →','Log in':'دخول','Cancel':'إلغاء','Join for free':'انضم مجاناً','Close':'إغلاق','Free download':'تحميل مجاني','♡ Save':'♡ حفظ','♥ Saved':'♥ تم الحفظ','Popular':'الشائع','No exact matches. Showing popular assets instead.':'لا توجد نتائج مطابقة. نعرض الأصول الشائعة بدلاً منها.','Enter a valid email address.':'أدخل بريداً إلكترونياً صحيحاً.','Password must be at least 8 characters.':'يجب ألا تقل كلمة المرور عن 8 أحرف.','Saved to favorites':'تمت الإضافة إلى المفضلة','Removed from favorites':'تمت الإزالة من المفضلة','Download started (demo)':'بدأ التحميل (تجريبي)','Welcome to Pixora!':'أهلاً بك في Pixora!','Welcome back!':'أهلاً بعودتك!','No favorites yet. Open an image and tap Save.':'لا توجد مفضلة بعد. افتح صورة واضغط حفظ.','Search Pixora':'ابحث في Pixora','Search for free Images, Videos, Music &…':'ابحث عن صور وفيديو وموسيقى مجانية…','Email':'البريد الإلكتروني','Password (8+ characters)':'كلمة المرور (8 أحرف أو أكثر)','Misty Valley':'وادي الضباب','Neon Crossing':'تقاطع النيون','Golden Hour':'الساعة الذهبية','Berry Basket':'سلة التوت','Alpine Lake':'بحيرة جبلية','Old Town Roofs':'أسطح المدينة القديمة','Quiet Portrait':'بورتريه هادئ','Citrus Slice':'شريحة حمضيات','Pine Ridge':'قمة الصنوبر','Night Market':'سوق الليل','Laughing Friends':'أصدقاء يضحكون','Fresh Pasta':'معكرونة طازجة'};
+var lang='en',OR=new WeakMap(),busy=false;
+function nm(s){return s.replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim()}
+function tx(k){var m;if(D[k])return D[k];if(m=k.match(/^(\d+) items$/))return m[1]+' عنصر';if(m=k.match(/^(\d+) tracks$/))return m[1]+' مقطع';if(m=k.match(/^(.+?) · (\d+) likes$/))return (D[m[1]]||m[1])+' · '+m[2]+' إعجاب';if(m=k.match(/^(\d+) matching assets$/))return m[1]+' نتيجة مطابقة';if(m=k.match(/^(\d+) saved assets$/))return m[1]+' ملف محفوظ';if(m=k.match(/^Results for (.+)$/))return 'نتائج: '+m[1];if(m=k.match(/^(.+?) • Free for commercial use$/))return (D[m[1]]||m[1])+' • مجاني للاستخدام التجاري';return null}
+function ap(root){var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),n,a=[];while(n=w.nextNode()){var p=n.parentNode.nodeName;if(p!='SCRIPT'&&p!='STYLE')a.push(n)}a.forEach(function(n){var k=nm(n.nodeValue);if(!k)return;var t=tx(k);if(t&&t!==k){if(!OR.has(n))OR.set(n,n.nodeValue);n.nodeValue=t}});root.querySelectorAll('[placeholder]').forEach(function(e){if(!e.dataset.ph)e.dataset.ph=nm(e.getAttribute('placeholder'));if(D[e.dataset.ph])e.setAttribute('placeholder',D[e.dataset.ph])})}
+function rs(){var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null),n;while(n=w.nextNode()){if(OR.has(n)){n.nodeValue=OR.get(n);OR.delete(n)}}document.querySelectorAll('[data-ph]').forEach(function(e){e.setAttribute('placeholder',e.dataset.ph)})}
+function setLang(l){lang=l;var R=document.documentElement;R.lang=l;R.dir=l=='ar'?'rtl':'ltr';if(l=='ar')ap(document.body);else rs();Q('lg').textContent=l=='ar'?'English':'العربية';try{localStorage.setItem('pxl',l)}catch(e){}}
+new MutationObserver(function(){if(lang=='ar'&&!busy){busy=true;requestAnimationFrame(function(){ap(document.body);busy=false})}}).observe(document.body,{childList:true,subtree:true});
+Q('lg').onclick=function(){setLang(lang=='ar'?'en':'ar');dr(false)};
+var AR=D;var FR={'Join':'Rejoindre','Explore':'Explorer','Photos':'Photos','Illustrations':'Illustrations','Vectors':'Vecteurs','Videos':'Vidéos','Music':'Musique','Stunning royalty-free images & media':'Des images et médias libres de droits, tout simplement superbes','nature':'nature','background':'arrière-plan','flowers':'fleurs','sunset':'coucher de soleil','forest':'forêt','travel':'voyage','Featured':'À la une :','Free assets for any project':'Des ressources gratuites pour tous vos projets','4.4M assets':'4,4 M de fichiers','1.2M assets':'1,2 M de fichiers','170k assets':'170 k fichiers','240k assets':'240 k fichiers','Over 6.3 million+ high quality stock images, videos and music shared by our talented community.':'Plus de 6,3 millions d’images, vidéos et musiques de haute qualité partagées par notre communauté de talents.','Editor\'s Choice':'Choix de la rédaction','All':'Tout','Nature':'Nature','City':'Ville','People':'Personnes','Food':'Cuisine','Assets shared':'Fichiers partagés','Creators':'Créateurs','Million downloads / month':'Millions de téléchargements / mois','Curated Collections & Playlists':'Collections et playlists sélectionnées','Collections':'Collections','\u266b Playlists':'\u266b Playlists','Halloween':'Halloween','Autumn / Fall':'Automne','International Cat Day':'Journée internationale du chat','Weddings':'Mariages','Black & White':'Noir et blanc','Strawberries':'Fraises','Chill Vibes':'Ambiance détente','Cinematic':'Cinématique','Acoustic Morning':'Matin acoustique','What\'s new on Pixora?':'Quoi de neuf sur Pixora ?','Humans of Pixora':'Humains de Pixora','Music & Sound':'Musique et sons','Contests':'Concours','LIVE':'EN DIRECT','Share your creativity':'Partagez votre créativité','Upload your photos, videos and music, and get discovered by millions of people on the web and social media!':'Importez vos photos, vidéos et musiques et faites-vous découvrir par des millions de personnes sur le web et les réseaux sociaux !','Upload':'Importer','Discover':'Découvrir','Community':'Communauté','About':'À propos','Popular Images':'Images populaires','Free Videos':'Vidéos gratuites','Free Music':'Musique gratuite','Ambassadors':'Ambassadeurs','Forum':'Forum','About us':'Qui sommes-nous','Blog':'Blog','Help Center':'Centre d’aide','Terms of Service':'Conditions d’utilisation','\u00a9 2026 Pixora. All rights reserved.':'\u00a9 2026 Pixora. Tous droits réservés.','Switch theme':'Changer de thème','My favorites':'Mes favoris','\u2190 Back':'\u2190 Retour','Log in':'Connexion','Cancel':'Annuler','Join for free':'Rejoindre gratuitement','Close':'Fermer','Free download':'Téléchargement gratuit','\u2661 Save':'\u2661 Enregistrer','\u2665 Saved':'\u2665 Enregistré','Popular':'Populaires','No exact matches. Showing popular assets instead.':'Aucun résultat exact. Voici plutôt les ressources populaires.','Enter a valid email address.':'Saisissez une adresse e-mail valide.','Password must be at least 8 characters.':'Le mot de passe doit contenir au moins 8 caractères.','Saved to favorites':'Ajouté aux favoris','Removed from favorites':'Retiré des favoris','Download started (demo)':'Téléchargement lancé (démo)','Welcome to Pixora!':'Bienvenue sur Pixora !','Welcome back!':'Content de vous revoir !','No favorites yet. Open an image and tap Save.':'Aucun favori pour l’instant. Ouvrez une image et appuyez sur Enregistrer.','Search Pixora':'Rechercher sur Pixora','Search for free Images, Videos, Music &\u2026':'Rechercher des images, vidéos et musiques gratuites…','Email':'E-mail','Password (8+ characters)':'Mot de passe (8 caractères min.)','Misty Valley':'Vallée brumeuse','Neon Crossing':'Carrefour néon','Golden Hour':'Heure dorée','Berry Basket':'Panier de baies','Alpine Lake':'Lac alpin','Old Town Roofs':'Toits de la vieille ville','Quiet Portrait':'Portrait paisible','Citrus Slice':'Tranche d’agrume','Pine Ridge':'Crête de pins','Night Market':'Marché de nuit','Laughing Friends':'Amis qui rient','Fresh Pasta':'Pâtes fraîches'};
+var P={ar:{i:' \u0639\u0646\u0635\u0631',t:' \u0645\u0642\u0637\u0639',l:' \u0625\u0639\u062c\u0627\u0628',m:' \u0646\u062a\u064a\u062c\u0629 \u0645\u0637\u0627\u0628\u0642\u0629',s:' \u0645\u0644\u0641 \u0645\u062d\u0641\u0648\u0638',r:'\u0646\u062a\u0627\u0626\u062c: ',f:'\u0645\u062c\u0627\u0646\u064a \u0644\u0644\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u062a\u062c\u0627\u0631\u064a'},fr:{i:' éléments',t:' titres',l:' j’aime',m:' résultats correspondants',s:' médias enregistrés',r:'Résultats pour ',f:'Libre pour usage commercial'}};
+function tx(k){var m,p=P[lang];if(!p)return null;if(D[k])return D[k];if(m=k.match(/^(\d+) items$/))return m[1]+p.i;if(m=k.match(/^(\d+) tracks$/))return m[1]+p.t;if(m=k.match(/^(.+?) \u00b7 (\d+) likes$/))return (D[m[1]]||m[1])+' \u00b7 '+m[2]+p.l;if(m=k.match(/^(\d+) matching assets$/))return m[1]+p.m;if(m=k.match(/^(\d+) saved assets$/))return m[1]+p.s;if(m=k.match(/^Results for (.+)$/))return p.r+m[1];if(m=k.match(/^(.+?) \u2022 Free for commercial use$/))return (D[m[1]]||m[1])+' \u2022 '+p.f;return null}
+var NX={en:'\u0627\u0644\u0639\u0631\u0628\u064a\u0629',ar:'Français',fr:'English'},NL={en:'ar',ar:'fr',fr:'en'};
+function setLang(l,auto){lang=l;D=l=='ar'?AR:l=='fr'?FR:{};var R=document.documentElement;R.lang=l;R.dir=l=='ar'?'rtl':'ltr';rs();if(l!='en')ap(document.body);Q('lg').textContent=NX[l];if(!auto){try{localStorage.setItem('pxl',l)}catch(e){}}}
+var b2=false;new MutationObserver(function(){if(lang=='fr'&&!b2){b2=true;requestAnimationFrame(function(){ap(document.body);b2=false})}}).observe(document.body,{childList:true,subtree:true});
+Q('lg').onclick=function(){setLang(NL[lang]);dr(false)};
+function detect(){var st=null;try{st=localStorage.getItem('pxl')}catch(e){}if(st&&P[st]||st=='en')return st;var ls=(navigator.languages||[navigator.language||'en']).map(function(x){return (x||'').toLowerCase().slice(0,2)});for(var i=0;i<ls.length;i++){if(ls[i]=='ar'||ls[i]=='fr')return ls[i]}var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}if(/^(Africa\/(Algiers|Tunis|Cairo|Tripoli|Casablanca|Khartoum)|Asia\/(Riyadh|Baghdad|Dubai|Kuwait|Qatar|Muscat|Bahrain|Amman|Beirut|Damascus|Aden|Gaza|Hebron))$/.test(tz))return 'ar';if(/^(Europe\/(Paris|Brussels|Luxembourg|Monaco)|Africa\/(Dakar|Abidjan|Douala|Kinshasa))$/.test(tz))return 'fr';return 'en'}
+var KS=Object.keys(FR);function mk(s){var a=s.split('|'),o={};KS.forEach(function(k,i){o[k]=a[i]});return o}
+var DICT={ar:AR,fr:FR,es:mk('Unirse|Explorar|Fotos|Ilustraciones|Vectores|Vídeos|Música|Imágenes y contenido libres de derechos, simplemente espectaculares|naturaleza|fondos|flores|atardecer|bosque|viajes|Destacado:|Recursos gratuitos para cualquier proyecto|4,4 M de archivos|1,2 M de archivos|170 mil archivos|240 mil archivos|Más de 6,3 millones de imágenes, vídeos y música de alta calidad compartidos por nuestra talentosa comunidad.|Selección del editor|Todo|Naturaleza|Ciudad|Personas|Comida|Archivos compartidos|Creadores|Millones de descargas al mes|Colecciones y listas seleccionadas|Colecciones|♫ Listas|Halloween|Otoño|Día Internacional del Gato|Bodas|Blanco y negro|Fresas|Ambiente relajado|Cinematográfico|Mañana acústica|¿Qué hay de nuevo en Pixora?|Personas de Pixora|Música y sonido|Concursos|EN VIVO|Comparte tu creatividad|Sube tus fotos, vídeos y música, y deja que millones de personas te descubran en la web y las redes sociales.|Subir|Descubrir|Comunidad|Acerca de|Imágenes populares|Vídeos gratis|Música gratis|Embajadores|Foro|Quiénes somos|Blog|Centro de ayuda|Términos del servicio|© 2026 Pixora. Todos los derechos reservados.|Cambiar tema|Mis favoritos|← Volver|Iniciar sesión|Cancelar|Unirse gratis|Cerrar|Descarga gratuita|♡ Guardar|♥ Guardado|Populares|Sin coincidencias exactas. Mostrando contenido popular.|Introduce un correo electrónico válido.|La contraseña debe tener al menos 8 caracteres.|Guardado en favoritos|Eliminado de favoritos|Descarga iniciada (demo)|¡Bienvenido a Pixora!|¡Qué bueno verte de nuevo!|Aún no hay favoritos. Abre una imagen y pulsa Guardar.|Buscar en Pixora|Buscar imágenes, vídeos y música gratis…|Correo electrónico|Contraseña (mín. 8 caracteres)|Valle brumoso|Cruce de neón|Hora dorada|Cesta de frutos rojos|Lago alpino|Tejados del casco antiguo|Retrato sereno|Rodaja de cítrico|Cresta de pinos|Mercado nocturno|Amigos riendo|Pasta fresca'),de:mk('Beitreten|Entdecken|Fotos|Illustrationen|Vektoren|Videos|Musik|Atemberaubende lizenzfreie Bilder und Medien|Natur|Hintergrund|Blumen|Sonnenuntergang|Wald|Reisen|Empfohlen:|Kostenlose Inhalte für jedes Projekt|4,4 Mio. Dateien|1,2 Mio. Dateien|170.000 Dateien|240.000 Dateien|Über 6,3 Millionen hochwertige Bilder, Videos und Musikstücke, geteilt von unserer talentierten Community.|Auswahl der Redaktion|Alle|Natur|Stadt|Menschen|Essen|Geteilte Dateien|Kreative|Mio. Downloads pro Monat|Kuratierte Sammlungen & Playlists|Sammlungen|♫ Playlists|Halloween|Herbst|Internationaler Tag der Katze|Hochzeiten|Schwarzweiß|Erdbeeren|Entspannte Stimmung|Filmisch|Akustischer Morgen|Was gibt es Neues bei Pixora?|Menschen bei Pixora|Musik & Sound|Wettbewerbe|LIVE|Teile deine Kreativität|Lade deine Fotos, Videos und Musik hoch und werde von Millionen Menschen im Web und in sozialen Medien entdeckt.|Hochladen|Entdecken|Community|Info|Beliebte Bilder|Kostenlose Videos|Kostenlose Musik|Botschafter|Forum|Über uns|Blog|Hilfecenter|Nutzungsbedingungen|© 2026 Pixora. Alle Rechte vorbehalten.|Design wechseln|Meine Favoriten|← Zurück|Anmelden|Abbrechen|Kostenlos beitreten|Schließen|Kostenloser Download|♡ Speichern|♥ Gespeichert|Beliebt|Keine exakten Treffer. Stattdessen werden beliebte Inhalte angezeigt.|Bitte gib eine gültige E-Mail-Adresse ein.|Das Passwort muss mindestens 8 Zeichen lang sein.|Zu Favoriten hinzugefügt|Aus Favoriten entfernt|Download gestartet (Demo)|Willkommen bei Pixora!|Willkommen zurück!|Noch keine Favoriten. Öffne ein Bild und tippe auf Speichern.|Pixora durchsuchen|Kostenlose Bilder, Videos und Musik suchen…|E-Mail|Passwort (mind. 8 Zeichen)|Nebeltal|Neonkreuzung|Goldene Stunde|Beerenkorb|Alpensee|Dächer der Altstadt|Ruhiges Porträt|Zitrusscheibe|Kiefernkamm|Nachtmarkt|Lachende Freunde|Frische Pasta'),it:mk('Iscriviti|Esplora|Foto|Illustrazioni|Vettoriali|Video|Musica|Immagini e contenuti liberi da diritti, semplicemente stupendi|natura|sfondi|fiori|tramonto|foresta|viaggi|In evidenza:|Risorse gratuite per ogni progetto|4,4 mln di file|1,2 mln di file|170 mila file|240 mila file|Oltre 6,3 milioni di immagini, video e brani musicali di alta qualità condivisi dalla nostra community di talenti.|Scelti dalla redazione|Tutti|Natura|Città|Persone|Cibo|File condivisi|Creatori|Mln di download al mese|Raccolte e playlist selezionate|Raccolte|♫ Playlist|Halloween|Autunno|Giornata internazionale del gatto|Matrimoni|Bianco e nero|Fragole|Atmosfera rilassata|Cinematografico|Mattina acustica|Novità su Pixora|Le persone di Pixora|Musica e suoni|Concorsi|IN DIRETTA|Condividi la tua creatività|Carica foto, video e musica e fatti scoprire da milioni di persone sul web e sui social.|Carica|Scopri|Community|Info|Immagini popolari|Video gratuiti|Musica gratuita|Ambasciatori|Forum|Chi siamo|Blog|Centro assistenza|Termini di servizio|© 2026 Pixora. Tutti i diritti riservati.|Cambia tema|I miei preferiti|← Indietro|Accedi|Annulla|Iscriviti gratis|Chiudi|Download gratuito|♡ Salva|♥ Salvato|Popolari|Nessuna corrispondenza esatta. Mostriamo i contenuti popolari.|Inserisci un indirizzo e-mail valido.|La password deve contenere almeno 8 caratteri.|Aggiunto ai preferiti|Rimosso dai preferiti|Download avviato (demo)|Benvenuto su Pixora!|Bentornato!|Nessun preferito per ora. Apri un’immagine e tocca Salva.|Cerca su Pixora|Cerca immagini, video e musica gratuiti…|E-mail|Password (min. 8 caratteri)|Valle nebbiosa|Incrocio al neon|Ora d’oro|Cesto di frutti di bosco|Lago alpino|Tetti del centro storico|Ritratto sereno|Fetta di agrume|Cresta di pini|Mercato notturno|Amici che ridono|Pasta fresca'),pt:mk('Participar|Explorar|Fotos|Ilustrações|Vetores|Vídeos|Música|Imagens e mídias livres de direitos autorais, simplesmente incríveis|natureza|plano de fundo|flores|pôr do sol|floresta|viagem|Destaque:|Recursos gratuitos para qualquer projeto|4,4 mi de arquivos|1,2 mi de arquivos|170 mil arquivos|240 mil arquivos|Mais de 6,3 milhões de imagens, vídeos e músicas de alta qualidade compartilhados pela nossa comunidade talentosa.|Escolha do editor|Tudo|Natureza|Cidade|Pessoas|Comida|Arquivos compartilhados|Criadores|Milhões de downloads por mês|Coleções e playlists selecionadas|Coleções|♫ Playlists|Halloween|Outono|Dia Internacional do Gato|Casamentos|Preto e branco|Morangos|Clima tranquilo|Cinematográfico|Manhã acústica|Novidades no Pixora|Pessoas do Pixora|Música e som|Concursos|AO VIVO|Compartilhe sua criatividade|Envie suas fotos, vídeos e músicas e seja descoberto por milhões de pessoas na web e nas redes sociais.|Enviar|Descobrir|Comunidade|Sobre|Imagens populares|Vídeos grátis|Música grátis|Embaixadores|Fórum|Quem somos|Blog|Central de ajuda|Termos de serviço|© 2026 Pixora. Todos os direitos reservados.|Alternar tema|Meus favoritos|← Voltar|Entrar|Cancelar|Participe grátis|Fechar|Download grátis|♡ Salvar|♥ Salvo|Populares|Nenhuma correspondência exata. Mostrando conteúdo popular.|Digite um e-mail válido.|A senha deve ter pelo menos 8 caracteres.|Salvo nos favoritos|Removido dos favoritos|Download iniciado (demonstração)|Bem-vindo ao Pixora!|Que bom ver você de novo!|Ainda não há favoritos. Abra uma imagem e toque em Salvar.|Pesquisar no Pixora|Pesquise imagens, vídeos e músicas grátis…|E-mail|Senha (mín. 8 caracteres)|Vale enevoado|Cruzamento neon|Hora dourada|Cesta de frutas vermelhas|Lago alpino|Telhados da cidade antiga|Retrato sereno|Fatia de cítrico|Crista de pinheiros|Mercado noturno|Amigos rindo|Massa fresca')};
+P.es={i:' elementos',t:' pistas',l:' me gusta',m:' resultados coincidentes',s:' archivos guardados',r:'Resultados para ',f:'Gratis para uso comercial'};P.de={i:' Elemente',t:' Titel',l:' Likes',m:' passende Ergebnisse',s:' gespeicherte Dateien',r:'Ergebnisse für ',f:'Kostenlos für kommerzielle Nutzung'};P.it={i:' elementi',t:' brani',l:' mi piace',m:' risultati corrispondenti',s:' file salvati',r:'Risultati per ',f:'Gratis per uso commerciale'};P.pt={i:' itens',t:' faixas',l:' curtidas',m:' resultados correspondentes',s:' arquivos salvos',r:'Resultados para ',f:'Grátis para uso comercial'};
+var LN={en:'English',es:'Español',de:'Deutsch',fr:'Français',it:'Italiano',pt:'Português',ar:'\u0627\u0644\u0639\u0631\u0628\u064a\u0629'},SUP={en:1,es:1,de:1,fr:1,it:1,pt:1,ar:1};
+function setLang(l,auto){lang=l;D=DICT[l]||{};var R=document.documentElement;R.lang=l;R.dir=l=='ar'?'rtl':'ltr';rs();if(l!='en')ap(document.body);document.querySelectorAll('#langs button').forEach(function(b){b.className=b.dataset.l==l?'on':''});if(!auto){try{localStorage.setItem('pxl',l)}catch(e){}}}
+var b3=false;new MutationObserver(function(){if(lang!='en'&&lang!='ar'&&lang!='fr'&&!b3){b3=true;requestAnimationFrame(function(){ap(document.body);b3=false})}}).observe(document.body,{childList:true,subtree:true});
+var st2=document.createElement('style');st2.textContent='#langs{display:flex;flex-wrap:wrap;gap:8px;padding:14px 0;border-bottom:1px solid var(--line)}#langs button{border:1.5px solid var(--line);background:none;color:var(--fg);font:600 16px "Instrument Sans",sans-serif;padding:8px 14px;border-radius:20px;cursor:pointer}#langs button.on{background:var(--fg);color:var(--bg)}';document.head.appendChild(st2);
+var LG=document.createElement('div');LG.id='langs';LG.innerHTML=Object.keys(LN).map(function(k){return '<button data-l="'+k+'">'+LN[k]+'</button>'}).join('');Q('dr').insertBefore(LG,Q('lg'));Q('lg').style.display='none';LG.onclick=function(e){var b=e.target.closest('button');if(b){setLang(b.dataset.l);dr(false)}};
+function detect(){var st=null;try{st=localStorage.getItem('pxl')}catch(e){}if(st&&SUP[st])return st;var ls=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'en']).map(function(x){return (x||'').toLowerCase().slice(0,2)});for(var i=0;i<ls.length;i++){if(SUP[ls[i]])return ls[i]}var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}var Z=[[/^(Africa\/(Algiers|Tunis|Cairo|Tripoli|Casablanca|Khartoum)|Asia\/(Riyadh|Baghdad|Dubai|Kuwait|Qatar|Muscat|Bahrain|Amman|Beirut|Damascus|Aden|Gaza|Hebron))$/,'ar'],[/^(Europe\/(Paris|Brussels|Luxembourg|Monaco)|Africa\/(Dakar|Abidjan|Douala|Kinshasa))$/,'fr'],[/^(Europe\/Madrid|Atlantic\/Canary|America\/(Mexico_City|Bogota|Lima|Santiago|Caracas|Guayaquil|La_Paz|Montevideo|Asuncion|Panama|Costa_Rica|Buenos_Aires|Cordoba|Guatemala|Havana|Santo_Domingo|El_Salvador|Tegucigalpa|Managua|Monterrey|Argentina\/.+))$/,'es'],[/^Europe\/(Berlin|Vienna|Zurich|Busingen)$/,'de'],[/^Europe\/(Rome|Vatican|San_Marino)$/,'it'],[/^(Europe\/Lisbon|Atlantic\/Madeira|America\/(Sao_Paulo|Bahia|Fortaleza|Recife|Manaus|Belem|Cuiaba|Campo_Grande))$/,'pt']];for(var j=0;j<Z.length;j++)if(Z[j][0].test(tz))return Z[j][1];return 'en'}
+var st3=document.createElement('style');st3.textContent='.lg{max-width:760px;padding-bottom:60px}.lg h2{margin:10px 0 8px}.lg h3{font-size:22px;margin:30px 0 8px}.lg p{font-size:18px;line-height:1.7}.lg .note{background:var(--chip);padding:12px 16px;border-radius:12px;color:var(--mute);font-size:15px;margin:10px 0 24px}.cookie{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:620px;margin:0 auto;background:var(--bg);border:1.5px solid var(--line);box-shadow:0 12px 40px rgba(0,0,0,.25);border-radius:22px;padding:18px 20px;z-index:80;display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cookie p{flex:1 1 260px;font-size:15px;line-height:1.5}.cookie a{text-decoration:underline;color:var(--green)}.cookie .btn{width:auto;height:44px;padding:0 26px;font-size:16px}#lbz{height:46px;font-size:16px}.tg{display:flex;flex-wrap:wrap;gap:8px}.tg a{background:var(--chip);color:var(--fg);padding:6px 14px;border-radius:16px;font-size:15px}';document.head.appendChild(st3);
+var LEG={privacy:['Privacy Policy',[['Who we are','Pixora (“we”) operates this website. Contact: privacy@pixora.example.'],['What we collect','Account details you give us (such as email and password) once accounts are available, content you upload, and basic technical data such as browser type and language needed to show the site. In this demo, your language, theme and favorites are stored only in your own browser.'],['Cookies and local storage','We use only essential browser storage for language, theme and favorites. We do not use advertising or tracking cookies. If we add analytics, we will ask for your consent first.'],['How we use your data','To provide and secure the service, show content in your language, answer your requests and meet legal obligations.'],['Legal bases (EU/UK)','Performance of a contract, our legitimate interests in running and securing the service, your consent where required, and legal obligations.'],['Sharing','We share data only with service providers (such as hosting, storage and email) bound by contract, and with authorities when the law requires it. We do not sell personal information and we do not share it for cross-context advertising.'],['Retention','We keep data while your account is active and as long as needed for the purposes above or required by law.'],['Your rights','Under the GDPR you may ask to access, correct, delete, restrict or port your data, object to processing, withdraw consent, and complain to your data protection authority. California residents have rights under the CCPA/CPRA to know, delete and correct their data and to opt out of sale or sharing. Write to privacy@pixora.example.'],['International transfers','If data leaves your region we use safeguards such as Standard Contractual Clauses.'],['Children','Pixora is not intended for people under 16.'],['Changes','We will update this page when our practices change.']]],terms:['Terms of Service',[['Acceptance','By using Pixora you agree to these terms. If you do not agree, please do not use the service.'],['Accounts','You must be at least 16, provide accurate information and keep your login secure. You are responsible for activity on your account.'],['Your uploads','You keep ownership of what you upload. You confirm that you created it or have the right to share it, and that you have any permissions needed from people, properties or brands shown. You grant Pixora a worldwide, non-exclusive, royalty-free license to host, display, distribute and sublicense your uploads to users under the Pixora License.'],['Using content','Content may be used as set out in the Pixora License.'],['Prohibited conduct','Do not upload illegal, infringing, hateful, sexually explicit or harmful content or malware. Do not scrape or bulk-download the site with automated tools, or try to bypass security.'],['Copyright complaints','See our Copyright (DMCA) page for how to report infringing content.'],['Termination','We may remove content or suspend accounts that break these terms. You may close your account at any time.'],['Disclaimer','The service and content are provided “as is” without warranties of any kind.'],['Limitation of liability','To the extent permitted by law, Pixora is not liable for indirect or consequential losses arising from your use of the service.'],['Governing law','These terms are governed by the laws of [your jurisdiction]. Contact: legal@pixora.example.']]],license:['Pixora License',[['What you can do','Use content for free for personal and commercial projects, in print and online, without asking permission or giving credit. Credit to the creator is appreciated but not required. You may edit and adapt content.'],['What you cannot do','Sell or distribute content unchanged as stock or on its own. Imply that creators, people shown or brands endorse you. Use images of identifiable people in a misleading, defamatory or sensitive way. Use logos or trademarks shown in content to suggest endorsement. Bulk-download content or build a competing stock service.'],['Releases','Content may show people, private property or brands without a release. You are responsible for getting any release your use requires.'],['No warranty','Content is provided without warranty. See the Terms of Service.']]],copyright:['Copyright (DMCA)',[['Our approach','Pixora respects intellectual property and responds to valid notices of alleged infringement.'],['Sending a notice','Email copyright@pixora.example with: your signature; the work you say is infringed; the exact page address of the material; your contact details; a statement that you believe in good faith the use is not authorized; and a statement, under penalty of perjury, that your notice is accurate and that you are the owner or authorized to act for the owner.'],['Counter-notice','If you believe material was removed by mistake, you may send a counter-notice with your contact details, the removed material and a statement under penalty of perjury that it was removed by mistake or misidentification.'],['Repeat infringers','We close the accounts of users who repeatedly infringe.'],['EU notices','Notices under the EU Digital Services Act may be sent to the same address.']]]};
+var dc=document.createElement('div');dc.className='res';dc.id='doc';dc.innerHTML='<div class="wrap"><div class="rh"><button class="join" id="dx">\u2190 Back</button></div><article class="lg" id="dbody"></article></div>';document.body.appendChild(dc);
+function openDoc(k,keep){var d=LEG[k];if(!d)return;var h='<h2>'+d[0]+'</h2><p class="note">Draft template. Have a qualified lawyer review it before launch. Last updated 27 October 2026.</p>';d[1].forEach(function(s){h+='<h3>'+s[0]+'</h3><p>'+s[1]+'</p>'});Q('dbody').innerHTML=h;dc.classList.add('on');dc.scrollTop=0;if(!keep){try{location.hash=k}catch(e){}}}
+Q('dx').onclick=function(){dc.classList.remove('on');try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}};
+var fa=document.querySelectorAll('footer details')[2];if(fa){var fl=fa.querySelectorAll('a');if(fl[3])fl[3].onclick=function(e){e.preventDefault();openDoc('terms')};[['Privacy Policy','privacy'],['Pixora License','license'],['Copyright (DMCA)','copyright']].forEach(function(x){var a=document.createElement('a');a.href='#'+x[1];a.textContent=x[0];a.onclick=function(e){e.preventDefault();openDoc(x[1])};fa.appendChild(a)})}
+var NW={'Skip to content':'تخطَّ إلى المحتوى|Aller au contenu|Saltar al contenido|Zum Inhalt springen|Vai al contenuto|Ir para o conteúdo','Small':'صغير|Petite|Pequeña|Klein|Piccola|Pequena','Medium':'متوسط|Moyenne|Mediana|Mittel|Media|Média','Large':'كبير|Grande|Grande|Groß|Grande|Grande','Original':'الأصلي|Originale|Original|Original|Originale|Original','Got it':'\u062d\u0633\u0646\u0627\u064b|Compris|Entendido|Verstanden|Ho capito|Entendi','Privacy Policy':'\u0633\u064a\u0627\u0633\u0629 \u0627\u0644\u062e\u0635\u0648\u0635\u064a\u0629|Politique de confidentialité|Política de privacidad|Datenschutzerklärung|Informativa sulla privacy|Política de privacidade','Pixora License':'\u062a\u0631\u062e\u064a\u0635 Pixora|Licence Pixora|Licencia de Pixora|Pixora-Lizenz|Licenza Pixora|Licença Pixora','Copyright (DMCA)':'\u062d\u0642\u0648\u0642 \u0627\u0644\u0646\u0634\u0631 (DMCA)|Droit d’auteur (DMCA)|Derechos de autor (DMCA)|Urheberrecht (DMCA)|Copyright (DMCA)|Direitos autorais (DMCA)','We only use essential browser storage for your language, theme and favorites. No tracking cookies.':'\u0646\u0633\u062a\u062e\u062f\u0645 \u0641\u0642\u0637 \u062a\u062e\u0632\u064a\u0646 \u0627\u0644\u0645\u062a\u0635\u0641\u062d \u0627\u0644\u0636\u0631\u0648\u0631\u064a \u0644\u0644\u063a\u062a\u0643 \u0648\u0645\u0638\u0647\u0631\u0643 \u0648\u0645\u0641\u0636\u0644\u062a\u0643. \u0644\u0627 \u062a\u0648\u062c\u062f \u0645\u0644\u0641\u0627\u062a \u062a\u062a\u0628\u0639.|Nous utilisons uniquement le stockage essentiel du navigateur pour votre langue, votre thème et vos favoris. Aucun cookie de suivi.|Solo usamos el almacenamiento esencial del navegador para tu idioma, tema y favoritos. Sin cookies de seguimiento.|Wir nutzen nur notwendigen Browser-Speicher für Sprache, Design und Favoriten. Keine Tracking-Cookies.|Usiamo solo l’archiviazione essenziale del browser per lingua, tema e preferiti. Nessun cookie di tracciamento.|Usamos apenas o armazenamento essencial do navegador para idioma, tema e favoritos. Sem cookies de rastreamento.'};
+Object.keys(NW).forEach(function(k){var v=NW[k].split('|');['ar','fr','es','de','it','pt'].forEach(function(l,i){DICT[l][k]=v[i]})});
+var ckd=false;try{ckd=localStorage.getItem('pxc')=='1'}catch(e){}
+if(!ckd){var cb=document.createElement('div');cb.className='cookie';cb.innerHTML='<p>We only use essential browser storage for your language, theme and favorites. No tracking cookies. <a href="#privacy" id="ckp">Privacy Policy</a></p><button class="btn" id="ck">Got it</button>';document.body.appendChild(cb);Q('ckp').onclick=function(e){e.preventDefault();openDoc('privacy')};Q('ck').onclick=function(){cb.remove();try{localStorage.setItem('pxc','1')}catch(e){}}}
+function openLB(i){ci=i;var d=T[i];Q('lbi').style.background='linear-gradient(160deg,'+d[3]+')';Q('lbt').textContent=d[0];Q('lbs').textContent=d[1]+' • Free for commercial use';Q('lbf').textContent=F.indexOf(i)>-1?'\u2665 Saved':'\u2661 Save';Q('lbg').innerHTML=d[0].toLowerCase().split(' ').concat(d[1].toLowerCase()).map(function(t){return '<a href="#" data-t="'+t+'">'+t+'</a>'}).join('');LB.classList.add('on')}
+Q('lbg').onclick=function(e){var a=e.target.closest('a');if(a){e.preventDefault();LB.classList.remove('on');doSearch(a.dataset.t)}};
+function route(){var h=(location.hash||'').slice(1);if(LEG[h])openDoc(h,true);else if(/^img\d+$/.test(h)&&T[+h.slice(3)])openLB(+h.slice(3))}
+window.addEventListener('hashchange',route);
+/* ===== Pixora v2 ===== */
+var SQ={q:'',type:'all',color:'all',sort:'pop'},curType='all',lastF=null;
+T.push(['Desert Dunes','Nature',300,'#d9a066,#7a3b2a'],['Foggy Pier','Nature',240,'#9fb4bf,#e9eef0'],['Rainy Window','City',280,'#2b3a4f,#7fa3b8'],['Subway Lights','City',230,'#1d1f3a,#f0b64a'],['Street Musician','People',310,'#3a2a2a,#e0a060'],['Hands at Work','People',250,'#6a4a3a,#e0c8a8'],['Espresso Morning','Food',220,'#4a2c1e,#d9b48a'],['Summer Salad','Food',260,'#3a7a3a,#e6d27a'],['Cherry Blossom','Nature',290,'#e8a0b8,#7aa0c8'],['Rooftop Sunset','City',240,'#d9603a,#2a2d5a'],['Dancing Crowd','People',320,'#5a2a7a,#f06a8a'],['Sourdough Loaf','Food',210,'#c8903a,#5a3a1e']);
+var BASE=T.length;
+var TY=['photo','photo','photo','photo','photo','illustration','photo','vector','illustration','video','video','photo','photo','photo','illustration','video','music','photo','photo','vector','illustration','photo','music','photo'];
+var KW=['mist fog valley green hills morning landscape','neon city night street crossing lights urban','sunset golden light portrait warm glow','berries strawberry fruit basket food red fresh','lake mountains alpine water landscape blue travel','old town roofs city rooftops travel europe','portrait person face calm dark','citrus lemon orange fruit slice food yellow','pine forest trees ridge mountains green','night market street food lights city crowd','friends laughing people happy together','pasta italian food dinner kitchen','desert dunes sand travel sahara landscape','pier fog sea water morning calm','rain window city moody drops','subway metro train lights city night','musician street music guitar busker','hands work craft people tools','coffee espresso morning cafe cup','salad summer vegetables healthy food green','cherry blossom spring flowers pink tree','rooftop sunset city skyline evening','dance crowd party music festival people','bread sourdough bakery loaf food'];
+var TN={photo:'Photo',illustration:'Illustration',vector:'Vector',video:'Video',music:'Music'},TP={photo:'Photos',illustration:'Illustrations',vector:'Vectors',video:'Videos',music:'Music'},TYMAP={photos:'photo',illustrations:'illustration',vectors:'vector',videos:'video',music:'music'};
+var SRC=[],LK=[],CL=[],HS=[];
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function rnd(s){return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296}}
+function hx(c){c=c.replace('#','');if(c.length==3)c=c.replace(/./g,'$&$&');return[0,2,4].map(function(i){return parseInt(c.substr(i,2),16)})}
+function sh(c,a){return '#'+hx(c).map(function(x){x=a<0?x*(1+a):x+(255-x)*a;x=Math.max(0,Math.min(255,Math.round(x)));return (x<16?'0':'')+x.toString(16)}).join('')}
+function f1(n){return Math.round(n*10)/10}
+function cname(c){var v=hx(c).map(function(x){return x/255}),mx=Math.max(v[0],v[1],v[2]),mn=Math.min(v[0],v[1],v[2]),l=(mx+mn)/2,d=mx-mn,s=d==0?0:d/(1-Math.abs(2*l-1)),h=0;if(s<.18||l<.14||l>.9)return 'neutral';if(mx==v[0])h=((v[1]-v[2])/d)%6;else if(mx==v[1])h=(v[2]-v[0])/d+2;else h=(v[0]-v[1])/d+4;h*=60;if(h<0)h+=360;return h<15||h>=345?'red':h<45?'orange':h<70?'yellow':h<170?'green':h<260?'blue':'purple'}
+function meta(i){HS[i]=null;if(SRC[i]){LK[i]=0;CL[i]=[];return}LK[i]=900+((i*7919+137)%97)*61;var c=T[i][3].split(',').map(cname);CL[i]=c[0]==c[1]?[c[0]]:c}
+for(var mi=0;mi<T.length;mi++)meta(mi);
+function addItem(n,c,src,w,h){var i=T.length;T.push([n,c,Math.max(200,Math.min(340,Math.round(260*h/w))),'#555555,#999999']);TY.push('photo');KW.push((c+' '+n).toLowerCase());SRC[i]={src:src,w:w,h:h};meta(i);return i}
+function saveUp(){var a=[];for(var i=BASE;i<T.length;i++)if(SRC[i])a.push({n:T[i][0],c:T[i][1],src:SRC[i].src,w:SRC[i].w,h:SRC[i].h});try{localStorage.setItem('pxu',JSON.stringify(a));return true}catch(e){return false}}
+(function(){var a=[];try{a=JSON.parse(localStorage.getItem('pxu')||'[]')}catch(e){}a.forEach(function(u){if(u&&u.src&&u.src.indexOf('data:image/')==0)addItem(String(u.n||'Upload'),u.c||'Nature',u.src,u.w||1,u.h||1)})})();
+/* art */
+function art(i){
+ var t=T[i],ty=TY[i],cs=t[3].split(','),A=cs[0],B=cs[1],r=rnd(i*977+13),k,x,y,w,h,b,wx,wy,pts,s='',cat=t[1];
+ s+='<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500"><defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+A+'"/><stop offset="1" stop-color="'+B+'"/></linearGradient><radialGradient id="v" cx=".5" cy=".45" r=".8"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".4"/></radialGradient><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .1 0"/></filter></defs><rect width="400" height="500" fill="'+(ty=='vector'?A:'url(#s)')+'"/>';
+ if(cat=='Nature'){
+  x=60+r()*280;y=110+r()*90;w=30+r()*20;
+  s+='<circle cx="'+f1(x)+'" cy="'+f1(y)+'" r="'+f1(w*2.6)+'" fill="'+sh(B,.55)+'" opacity=".22"/><circle cx="'+f1(x)+'" cy="'+f1(y)+'" r="'+f1(w)+'" fill="'+sh(B,.6)+'" opacity=".9"/>';
+  for(k=0;k<3;k++){b=290+k*55;pts='M0 500L0 '+f1(b-r()*60);for(x=40;x<=400;x+=40)pts+='L'+x+' '+f1(b-(70-k*14)*(.25+r()));pts+='L400 500Z';s+='<path d="'+pts+'" fill="'+sh(A,-.28-k*.18)+'" opacity="'+(.75+k*.12)+'"/>'}
+  s+='<rect y="430" width="400" height="70" fill="'+sh(B,.1)+'" opacity=".35"/>';
+  for(k=0;k<16;k++){x=r()*400;h=34+r()*56;w=h*.34;y=470+r()*30;s+='<path d="M'+f1(x)+' '+f1(y-h)+'L'+f1(x+w)+' '+f1(y)+'L'+f1(x-w)+' '+f1(y)+'Z" fill="'+sh(A,-.78)+'"/>'}
+ }else if(cat=='City'){
+  for(k=0;k<26;k++)s+='<circle cx="'+f1(r()*400)+'" cy="'+f1(r()*200)+'" r="'+f1(.5+r()*1.1)+'" fill="#fff" opacity="'+f1(.3+r()*.5)+'"/>';
+  x=240+r()*110;s+='<circle cx="'+f1(x)+'" cy="170" r="80" fill="'+sh(B,.4)+'" opacity=".25"/><circle cx="'+f1(x)+'" cy="170" r="26" fill="'+sh(B,.7)+'" opacity=".9"/>';
+  x=-10;while(x<400){w=26+r()*38;h=130+r()*230;s+='<rect x="'+f1(x)+'" y="'+f1(440-h)+'" width="'+f1(w)+'" height="'+f1(h)+'" fill="'+sh(A,-.55-r()*.25)+'"/>';
+   for(wy=440-h+12;wy<428;wy+=15)for(wx=x+5;wx<x+w-7;wx+=10)if(r()>.5)s+='<rect x="'+f1(wx)+'" y="'+f1(wy)+'" width="4" height="7" fill="'+sh(B,.35)+'" opacity="'+f1(.5+r()*.5)+'"/>';
+   x+=w+2}
+  s+='<rect y="440" width="400" height="60" fill="'+sh(A,-.85)+'"/>';
+  for(k=0;k<7;k++)s+='<rect x="'+f1(r()*400)+'" y="446" width="3" height="'+f1(20+r()*34)+'" fill="'+B+'" opacity=".42"/>';
+ }else if(cat=='People'){
+  for(k=0;k<16;k++)s+='<circle cx="'+f1(r()*400)+'" cy="'+f1(r()*420)+'" r="'+f1(14+r()*46)+'" fill="'+sh(B,.35)+'" opacity="'+f1(.12+r()*.22)+'"/>';
+  x=190+r()*20;
+  s+='<path d="M50 500C60 380 125 335 200 335C275 335 340 380 350 500Z" fill="'+sh(A,-.82)+'"/><rect x="178" y="285" width="44" height="60" rx="18" fill="'+sh(A,-.82)+'"/><ellipse cx="'+f1(x)+'" cy="225" rx="48" ry="58" fill="'+sh(A,-.84)+'"/>';
+  s+='<path d="M'+f1(x+40)+' 190A48 58 0 0 1 '+f1(x+32)+' 268" fill="none" stroke="'+sh(B,.55)+'" stroke-width="2.5" opacity=".55"/>';
+ }else{
+  s+='<circle cx="212" cy="302" r="160" fill="#000" opacity=".25"/><circle cx="200" cy="290" r="160" fill="#f7f3ec"/><circle cx="200" cy="290" r="128" fill="#ebe4d6"/><circle cx="200" cy="290" r="118" fill="#f4efe6"/>';
+  for(k=0;k<14;k++){var an=r()*6.283,d=r()*78;x=200+Math.cos(an)*d;y=290+Math.sin(an)*d;w=16+r()*22;
+   s+='<circle cx="'+f1(x)+'" cy="'+f1(y)+'" r="'+f1(w)+'" fill="'+sh(k%2?A:B,r()*.3-.15)+'"/><circle cx="'+f1(x-w*.3)+'" cy="'+f1(y-w*.3)+'" r="'+f1(w*.28)+'" fill="#fff" opacity=".35"/>'}
+  for(k=0;k<5;k++)s+='<ellipse cx="'+f1(150+r()*100)+'" cy="'+f1(250+r()*80)+'" rx="22" ry="8" fill="#4f8a3a" transform="rotate('+Math.round(r()*180)+' 200 290)" opacity=".9"/>';
+ }
+ if(ty=='music'){s+='<rect width="400" height="500" fill="#000" opacity=".28"/>';for(k=0;k<38;k++){h=14+Math.abs(Math.sin(k*.45+r()*1.5))*70+r()*34;s+='<rect x="'+f1(22+k*9.6)+'" y="'+f1(250-h/2)+'" width="5" height="'+f1(h)+'" rx="2.5" fill="#fff" opacity=".85"/>'}}
+ if(ty=='photo'||ty=='video')s+='<rect width="400" height="500" fill="url(#v)"/><rect width="400" height="500" filter="url(#n)"/>';
+ return s+'</svg>'}
+function artCSS(i){if(SRC[i])return 'url("'+SRC[i].src+'")';return AC[i]||(AC[i]='url("data:image/svg+xml,'+encodeURIComponent(art(i))+'")')}
+var AC=[];
+var pio=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){pio.unobserve(e.target);e.target.style.backgroundImage=artCSS(+e.target.dataset.art)}})},{rootMargin:'600px'}):null;
+function paint(root){root.querySelectorAll('[data-art]').forEach(function(e){if(pio)pio.observe(e);else e.style.backgroundImage=artCSS(+e.dataset.art)})}
+function tileHTML(i,compact){var t=T[i],ty=TY[i],bd='';if(SRC[i])bd='<span class="yb">Yours</span>';else if(ty=='video'||ty=='music')bd='<span class="pb">'+(ty=='video'?'▶':'♪')+' 0:'+(10+(i*37)%50)+'</span>';return '<button class="tile" data-i="'+i+'" data-c="'+esc(t[1])+'" data-art="'+i+'" style="height:'+t[2]+'px">'+bd+'<span class="ov"><b>'+esc(t[0])+'</b>'+esc(t[1])+(compact||SRC[i]?'':' &middot; '+LK[i]+' likes')+'</span></button>'}
+function mainIds(){var o=[];for(var i=0;i<T.length;i++)if(i<16||SRC[i])o.push(i);return o}
+function rebuild(){M.innerHTML=mainIds().map(function(i){return tileHTML(i)}).join('');paint(M);mark();var on=document.querySelector('#filters .on');if(on&&on.dataset.c!='all')M.querySelectorAll('.tile').forEach(function(t){t.classList.toggle('hide',t.dataset.c!=on.dataset.c)})}
+M.onclick=tc;Q('rm').onclick=tc;
+/* search */
+function L(k){return (lang!='en'&&D[k])||k}
+function HAY(i){if(!HS[i]){var a=[T[i][0],T[i][1],TY[i],TP[TY[i]],KW[i]||''];if(!SRC[i])['ar','fr','es','de','it','pt'].forEach(function(l){var d=DICT[l]||{};a.push(d[T[i][0]]||'',d[T[i][1]]||'',d[TP[TY[i]]]||'')});HS[i]=a.join(' ').toLowerCase()}return HS[i]}
+function runSearch(){var ws=SQ.q.toLowerCase().split(/\s+/).filter(Boolean),ids=[],sc={};
+ for(var i=0;i<T.length;i++){if(SQ.type!='all'&&TY[i]!=SQ.type)continue;if(SQ.color!='all'&&CL[i].indexOf(SQ.color)<0)continue;var n=0,h=HAY(i);ws.forEach(function(w){if(h.indexOf(w)>-1)n++});if(ws.length&&!n)continue;sc[i]=n;ids.push(i)}
+ var note=ids.length+' matching assets';
+ if(!ids.length){for(i=0;i<T.length;i++){if(SQ.type!='all'&&TY[i]!=SQ.type)continue;ids.push(i);sc[i]=0}if(!ids.length)for(i=0;i<T.length;i++){ids.push(i);sc[i]=0}note='No exact matches. Showing popular assets instead.'}
+ ids.sort(function(a,b){return SQ.sort=='new'?b-a:(sc[b]-sc[a])||(LK[b]-LK[a])});
+ var title=SQ.q?'Results for “'+SQ.q+'”':(SQ.type!='all'?TP[SQ.type]:'Popular');
+ render(ids,note,title,true);
+ document.querySelectorAll('#tf button').forEach(function(b){b.className=b.dataset.t==SQ.type?'on':''});
+ document.querySelectorAll('#sw .sw').forEach(function(b){b.classList.toggle('on',b.dataset.k==SQ.color)});
+ Q('so').value=SQ.sort;Q('rq').value=SQ.q}
+function render(ids,note,title,sf){var out=[];for(var k=0;k<ids.length&&k<60;k++)out.push(tileHTML(ids[k],true));Q('rm').innerHTML=out.join('');paint(Q('rm'));Q('rt').textContent=title;Q('rc').textContent=note;Q('fbar').hidden=!sf;mark();Q('res').classList.add('on');Q('res').scrollTop=0}
+function doSearch(q){q=(q||'').trim();var low=q.toLowerCase();if(TYMAP[low]){SQ.type=TYMAP[low];SQ.q=''}else{SQ.q=q;SQ.type=curType}SQ.color='all';runSearch()}
+var FB=document.createElement('div');FB.className='fbar';FB.id='fbar';FB.hidden=true;
+FB.innerHTML='<div class="filters" id="tf"><button type="button" data-t="all" class="on">All</button><button type="button" data-t="photo">Photos</button><button type="button" data-t="illustration">Illustrations</button><button type="button" data-t="vector">Vectors</button><button type="button" data-t="video">Videos</button><button type="button" data-t="music">Music</button></div><div class="fr2"><select class="in so" id="so" aria-label="Sort by"><option value="pop">Popular</option><option value="new">Newest</option></select><div class="sws" id="sw">'+[['red','#e5484d'],['orange','#f2873a'],['yellow','#f5c542'],['green','#3fae6a'],['blue','#3b82d6'],['purple','#8a5cd6'],['neutral','#6b7280']].map(function(c){return '<button type="button" class="sw" data-k="'+c[0]+'" style="background:'+c[1]+'" title="'+c[0]+'" aria-label="'+c[0]+'"></button>'}).join('')+'</div></div>';
+Q('rc').after(FB);
+Q('tf').onclick=function(e){var b=e.target.closest('button');if(b){SQ.type=b.dataset.t;runSearch()}};
+Q('sw').onclick=function(e){var b=e.target.closest('.sw');if(b){SQ.color=SQ.color==b.dataset.k?'all':b.dataset.k;runSearch()}};
+Q('so').onchange=function(){SQ.sort=this.value;runSearch()};
+Q('rq').onkeydown=function(e){if(e.key=='Enter'){SQ.q=this.value.trim();runSearch()}};
+/* suggestions */
+function sugList(q){q=q.trim().toLowerCase();if(!q)return ['nature','sunset','city night','coffee','portrait'];var o=[];for(var i=0;i<T.length&&o.length<6;i++)if(HAY(i).indexOf(q)>-1)o.push(L(T[i][0]));return o}
+function sugRender(){var l=sugList(bi.value);sg.innerHTML=l.map(function(s){return '<a href="#">'+esc(s)+'</a>'}).join('');sg.classList.toggle('on',l.length>0)}
+bi.onfocus=sugRender;bi.oninput=sugRender;bi.onblur=null;
+bs.addEventListener('focusout',function(){setTimeout(function(){if(!bs.contains(document.activeElement))sg.classList.remove('on')},120)});
+bi.addEventListener('keydown',function(e){if(e.key=='ArrowDown'){var a=sg.querySelector('a');if(a){e.preventDefault();a.focus()}}});
+sg.addEventListener('keydown',function(e){var a=e.target.closest('a');if(!a)return;if(e.key=='ArrowDown'&&a.nextElementSibling){e.preventDefault();a.nextElementSibling.focus()}if(e.key=='ArrowUp'){e.preventDefault();(a.previousElementSibling||bi).focus()}});
+document.querySelectorAll('.tabs button').forEach(function(b,i){b.setAttribute('role','tab');b.setAttribute('aria-selected',b.classList.contains('on'));b.addEventListener('click',function(){curType=['all','photo','illustration','vector','video','music'][i];document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x==b)})})});
+document.querySelectorAll('.mnav a').forEach(function(a){a.onclick=function(e){e.preventDefault();doSearch(a.dataset.s)}});
+/* detail */
+Q('lbs').insertAdjacentHTML('beforebegin','<span class="tychip" id="lbty"></span>');
+Q('lbg').insertAdjacentHTML('afterend','<span class="rl" id="lbrl">Related</span><div class="rel" id="lbr"></div>');
+Q('lbf').insertAdjacentHTML('afterend','<button class="join" id="lbc" type="button">Copy link</button><button class="join" id="lbdel" type="button" hidden>Delete</button>');
+function sizeOf(i,k){var W=[640,1280,1920,3200][k],ar=SRC[i]?SRC[i].h/SRC[i].w:1.25;return[W,Math.round(W*ar)]}
+function dimUpdate(){var s=sizeOf(ci,Q('lbz').selectedIndex);Q('lbdim').textContent=s[0]+' × '+s[1]+' px'}
+function relHTML(i){var o=[],k,j;for(k=1;k<T.length&&o.length<4;k++){j=(i+k)%T.length;if(T[j][1]==T[i][1])o.push(j)}for(k=1;k<T.length&&o.length<4;k++){j=(i+k)%T.length;if(o.indexOf(j)<0)o.push(j)}Q('lbr').innerHTML=o.map(function(j){return '<button type="button" class="rb" data-i="'+j+'" data-art="'+j+'" title="'+esc(T[j][0])+'" aria-label="'+esc(T[j][0])+'"></button>'}).join('');paint(Q('lbr'))}
+function openLB(i,keep){if(!T[i])return;ci=i;var d=T[i];if(!keep)lastF=document.activeElement;Q('lbi').style.backgroundImage=artCSS(i);Q('lbt').textContent=d[0];Q('lbty').textContent=TN[TY[i]];Q('lbs').textContent=d[1]+' • Free for commercial use';Q('lbf').textContent=F.indexOf(i)>-1?'♥ Saved':'♡ Save';Q('lbg').innerHTML=d[0].toLowerCase().split(' ').concat(d[1].toLowerCase()).map(function(t){return '<a href="#" data-t="'+esc(t)+'">'+esc(t)+'</a>'}).join('');Q('lbdel').hidden=!SRC[i];Q('lbc').hidden=!!SRC[i];dimUpdate();relHTML(i);LB.classList.add('on');try{history.replaceState(null,'','#img'+i)}catch(e){}if(!keep)Q('lbx').focus()}
+Q('lbr').onclick=function(e){var b=e.target.closest('.rb');if(b)openLB(+b.dataset.i,true)};
+Q('lbf').onclick=function(){var k=F.indexOf(ci);if(k>-1){F.splice(k,1);toast('Removed from favorites')}else{F.push(ci);toast('Saved to favorites')}sv();mark();Q('lbf').textContent=F.indexOf(ci)>-1?'♥ Saved':'♡ Save'};
+Q('lbz').onchange=dimUpdate;
+Q('lbc').onclick=function(){var u=location.href.split('#')[0]+'#img'+ci;function ok(){toast('Link copied')}function fb(){var t=document.createElement('textarea');t.value=u;t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();try{document.execCommand('copy');ok()}catch(e){}t.remove()}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(ok,fb);else fb()};
+Q('lbd').onclick=function(){var inF=false;try{inF=window.self!==window.top}catch(e){inF=true}if(inF){toast('Downloads work outside the preview.');return}var s=sizeOf(ci,Q('lbz').selectedIndex),c=document.createElement('canvas'),im=new Image(),up=!!SRC[ci];c.width=s[0];c.height=s[1];im.onload=function(){c.getContext('2d').drawImage(im,0,0,s[0],s[1]);c.toBlob(function(b){if(!b){toast('Download failed');return}var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=T[ci][0].toLowerCase().replace(/[^a-z0-9]+/g,'-')+'-'+s[0]+(up?'.jpg':'.png');document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},4000);toast('Download started')},up?'image/jpeg':'image/png',.92)};im.onerror=function(){toast('Download failed')};im.src=up?SRC[ci].src:'data:image/svg+xml,'+encodeURIComponent(art(ci))};
+Q('lbdel').onclick=function(){var i=ci;if(!SRC[i])return;[T,TY,KW,SRC,LK,CL,HS].forEach(function(a){a.splice(i,1)});F=F.filter(function(x){return x!=i}).map(function(x){return x>i?x-1:x});sv();saveUp();LB.classList.remove('on');Q('res').classList.remove('on');rebuild();toast('Deleted')};
+new MutationObserver(function(){if(!LB.classList.contains('on')){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}if(lastF){try{lastF.focus()}catch(x){}lastF=null}}}).observe(LB,{attributes:true,attributeFilter:['class']});
+function trap(e,box){if(e.key!='Tab')return;var f=[].filter.call(box.querySelectorAll('button,input,select,a[href]'),function(x){return x.offsetParent!==null});if(!f.length)return;var a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement==a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement==z){e.preventDefault();a.focus()}}
+/* upload */
+var um=document.createElement('div');um.className='lb';um.id='um';um.setAttribute('role','dialog');um.setAttribute('aria-modal','true');um.setAttribute('aria-labelledby','umt');
+um.innerHTML='<div class="lbc" style="grid-template-columns:1fr;max-width:480px"><div class="lbm"><b id="umt">Upload your work</b><input id="uf" type="file" accept="image/*" multiple hidden><button class="btn" id="up1" type="button">Choose images</button><div class="upv" id="upv"></div><input class="in" id="ut" placeholder="Title" aria-label="Title"><select class="in" id="uc" aria-label="Category"><option>Nature</option><option>City</option><option>People</option><option>Food</option></select><span class="dn">Your uploads stay in this browser. Nothing is sent to a server.</span><div class="err" id="ue"></div><button class="btn" id="up2" type="button">Publish</button><button class="join" id="ux" type="button">Cancel</button></div></div>';
+document.body.appendChild(um);
+var stg=[];
+function readImg(file,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var sc=Math.min(1,1000/Math.max(im.width,im.height)),w=Math.round(im.width*sc),h=Math.round(im.height*sc),c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);cb({src:c.toDataURL('image/jpeg',.82),w:w,h:h,n:file.name.replace(/\.[^.]+$/,'')})};im.onerror=function(){cb(null)};im.src=r.result};r.onerror=function(){cb(null)};r.readAsDataURL(file)}
+function umClose(){um.classList.remove('on')}
+document.querySelector('.up .btn').onclick=function(){stg=[];Q('upv').innerHTML='';Q('ue').textContent='';Q('ut').value='';Q('uf').value='';um.classList.add('on');Q('up1').focus()};
+Q('up1').onclick=function(){Q('uf').click()};
+Q('uf').onchange=function(){var fs=[].slice.call(this.files).filter(function(f){return /^image\//.test(f.type)&&f.size<8e6}).slice(0,6);stg=[];Q('upv').innerHTML='';Q('ue').textContent='';if(!fs.length){Q('ue').textContent='Choose an image file.';return}var left=fs.length;fs.forEach(function(f){readImg(f,function(o){if(o){stg.push(o);var im=document.createElement('img');im.src=o.src;im.alt='';Q('upv').appendChild(im)}if(--left==0&&!stg.length)Q('ue').textContent='Choose an image file.'})})};
+Q('up2').onclick=function(){if(!stg.length){Q('ue').textContent='Choose an image file.';return}var t=Q('ut').value.trim().slice(0,60),c=Q('uc').value,first=T.length;stg.forEach(function(o,k){addItem(t?(stg.length>1?t+' '+(k+1):t):o.n.slice(0,60),c,o.src,o.w,o.h)});if(!saveUp()){while(T.length>first)[T,TY,KW,SRC,LK,CL,HS].forEach(function(a){a.length=first});Q('ue').textContent='Not enough space in this browser. Delete an upload and try again.';return}umClose();rebuild();toast('Published');Q('mas').scrollIntoView({behavior:'smooth',block:'start'})};
+Q('ux').onclick=umClose;um.onclick=function(e){if(e.target==um)umClose()};
+document.addEventListener('keydown',function(e){if(e.key=='Escape')umClose();if(LB.classList.contains('on')){trap(e,LB);if(e.target.tagName!='SELECT'){if(e.key=='ArrowRight')openLB((ci+1)%T.length,true);if(e.key=='ArrowLeft')openLB((ci+T.length-1)%T.length,true)}}if(JM.classList.contains('on'))trap(e,JM);if(um.classList.contains('on'))trap(e,um)});
+Q('joinb').addEventListener('click',function(){setTimeout(function(){Q('ji1').focus()},30)});
+Q('je').insertAdjacentHTML('beforebegin','<span class="dn">Sign-in is a demo. Nothing is sent or stored.</span>');
+/* grid, mosaic */
+rebuild();
+Q('mosaic').innerHTML=[4,1,2,3,8].map(function(i){return '<button class="mt" data-i="'+i+'" data-art="'+i+'"><span>'+T[i][0]+'</span></button>'}).join('');paint(Q('mosaic'));
+Q('mosaic').onclick=function(e){var b=e.target.closest('.mt');if(b)openLB(+b.dataset.i)};
+/* footer */
+(function(){var f=document.querySelector('footer .wrap'),a=f.querySelector('.flogo'),p=f.querySelector('p.d'),s=f.querySelector('.soc'),w=document.createElement('div');w.className='fb';f.insertBefore(w,a);w.appendChild(a);w.appendChild(p);w.appendChild(s);['Instagram','Facebook','TikTok','X','LinkedIn','YouTube','Pinterest'].forEach(function(n,i){var l=s.children[i];if(l)l.setAttribute('aria-label',n)})})();
+function fo(){if(innerWidth>=900)document.querySelectorAll('footer details').forEach(function(d){d.open=true})}fo();addEventListener('resize',fo);
+if(matchMedia('(prefers-reduced-motion:reduce)').matches)clearInterval(tm);
+/* new translations */
+(function(){var X={'Photo':'صورة|Photo|Foto|Foto|Foto|Foto','Illustration':'رسم|Illustration|Ilustración|Illustration|Illustrazione|Ilustração','Vector':'متجه|Vecteur|Vector|Vektor|Vettoriale|Vetor','Video':'فيديو|Vidéo|Vídeo|Video|Video|Vídeo','Newest':'الأحدث|Plus récents|Más recientes|Neueste|Più recenti|Mais recentes','Copy link':'نسخ الرابط|Copier le lien|Copiar enlace|Link kopieren|Copia link|Copiar link','Link copied':'تم نسخ الرابط|Lien copié|Enlace copiado|Link kopiert|Link copiato|Link copiado','Downloads work outside the preview.':'التحميل يعمل خارج المعاينة.|Le téléchargement fonctionne hors de l’aperçu.|La descarga funciona fuera de la vista previa.|Downloads funktionieren außerhalb der Vorschau.|Il download funziona fuori dall’anteprima.|O download funciona fora da pré-visualização.','Download started':'بدأ التحميل|Téléchargement lancé|Descarga iniciada|Download gestartet|Download avviato|Download iniciado','Download failed':'تعذّر التحميل|Échec du téléchargement|Error en la descarga|Download fehlgeschlagen|Download non riuscito|Falha no download','Upload your work':'ارفع أعمالك|Importez vos créations|Sube tu trabajo|Lade deine Werke hoch|Carica i tuoi lavori|Envie seus trabalhos','Choose images':'اختر صوراً|Choisir des images|Elegir imágenes|Bilder auswählen|Scegli immagini|Escolher imagens','Title':'العنوان|Titre|Título|Titel|Titolo|Título','Category':'الفئة|Catégorie|Categoría|Kategorie|Categoria|Categoria','Publish':'انشر|Publier|Publicar|Veröffentlichen|Pubblica|Publicar','Your uploads stay in this browser. Nothing is sent to a server.':'تبقى أعمالك في هذا المتصفح فقط. لا يُرسل شيء إلى أي خادم.|Vos fichiers restent dans ce navigateur. Rien n’est envoyé à un serveur.|Tus archivos se quedan en este navegador. No se envía nada a un servidor.|Deine Dateien bleiben in diesem Browser. Es wird nichts an einen Server gesendet.|I tuoi file restano in questo browser. Non viene inviato nulla a un server.|Seus arquivos ficam neste navegador. Nada é enviado a um servidor.','Yours':'لك|À vous|Tuyo|Von dir|Tuo|Seu','Delete':'حذف|Supprimer|Eliminar|Löschen|Elimina|Excluir','Published':'تم النشر|Publié|Publicado|Veröffentlicht|Pubblicato|Publicado','Deleted':'تم الحذف|Supprimé|Eliminado|Gelöscht|Eliminato|Excluído','Choose an image file.':'اختر ملف صورة.|Choisissez un fichier image.|Elige un archivo de imagen.|Wähle eine Bilddatei.|Scegli un file immagine.|Escolha um arquivo de imagem.','Not enough space in this browser. Delete an upload and try again.':'لا توجد مساحة كافية في المتصفح. احذف عملاً وأعد المحاولة.|Pas assez d’espace dans ce navigateur. Supprimez un fichier et réessayez.|No hay espacio suficiente en este navegador. Elimina un archivo e inténtalo de nuevo.|Nicht genug Speicherplatz in diesem Browser. Lösche eine Datei und versuche es erneut.|Spazio insufficiente in questo browser. Elimina un file e riprova.|Espaço insuficiente neste navegador. Exclua um arquivo e tente novamente.','Sign-in is a demo. Nothing is sent or stored.':'تسجيل الدخول تجريبي. لا يُرسل شيء ولا يُخزَّن.|La connexion est une démo. Rien n’est envoyé ni enregistré.|El inicio de sesión es una demo. No se envía ni se guarda nada.|Die Anmeldung ist eine Demo. Es wird nichts gesendet oder gespeichert.|L’accesso è una demo. Non viene inviato né salvato nulla.|O login é uma demonstração. Nada é enviado ou armazenado.','Related':'مشابهة|Similaires|Relacionadas|Ähnliche|Simili|Relacionadas','Desert Dunes':'كثبان الصحراء|Dunes du désert|Dunas del desierto|Wüstendünen|Dune del deserto|Dunas do deserto','Foggy Pier':'رصيف ضبابي|Jetée dans la brume|Muelle con niebla|Nebliger Pier|Molo nella nebbia|Cais com neblina','Rainy Window':'نافذة ماطرة|Fenêtre sous la pluie|Ventana lluviosa|Regenfenster|Finestra sotto la pioggia|Janela chuvosa','Subway Lights':'أضواء المترو|Lumières du métro|Luces del metro|Lichter der U-Bahn|Luci della metro|Luzes do metrô','Street Musician':'موسيقي الشارع|Musicien de rue|Músico callejero|Straßenmusiker|Musicista di strada|Músico de rua','Hands at Work':'أيدٍ تعمل|Des mains à l’ouvrage|Manos trabajando|Hände bei der Arbeit|Mani al lavoro|Mãos à obra','Espresso Morning':'صباح الإسبريسو|Matin espresso|Mañana de espresso|Espresso-Morgen|Mattina all’espresso|Manhã de espresso','Summer Salad':'سلطة الصيف|Salade d’été|Ensalada de verano|Sommersalat|Insalata estiva|Salada de verão','Cherry Blossom':'أزهار الكرز|Cerisiers en fleurs|Cerezos en flor|Kirschblüte|Fiori di ciliegio|Flor de cerejeira','Rooftop Sunset':'غروب فوق السطح|Coucher de soleil sur le toit|Atardecer en la azotea|Sonnenuntergang auf dem Dach|Tramonto sul tetto|Pôr do sol no terraço','Dancing Crowd':'حشد يرقص|Foule en train de danser|Multitud bailando|Tanzende Menge|Folla che balla|Multidão dançando','Sourdough Loaf':'رغيف العجين المخمّر|Pain au levain|Pan de masa madre|Sauerteigbrot|Pane a lievito madre|Pão de fermentação natural'};
+Object.keys(X).forEach(function(k){var v=X[k].split('|');['ar','fr','es','de','it','pt'].forEach(function(l,i){DICT[l][k]=v[i]})})})();
 
-  <!-- JavaScript Script -->
-  <script>
-    // قائمة البيانات الافتراضية للصور
-    const galleryData = [
-      { id: 1, title: 'خلفية 3D تجريدية ملونة', author: 'أحمد الزحاف', type: 'premium', category: 'photos', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80' },
-      { id: 2, title: 'رسم زيت لغروب الصحراء', author: 'سارة خالد', type: 'free', category: 'vectors', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80' },
-      { id: 3, title: 'أشكال هندسية عصرية', author: 'كريم محمد', type: 'premium', category: 'psd', img: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80' },
-      { id: 4, title: 'شخصية أنيميشن بالذكاء الاصطناعي', author: 'AI Art', type: 'free', category: 'ai', img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80' },
-      { id: 5, title: 'تصميم شعار مستقبلي', author: 'عمر علي', type: 'free', category: 'vectors', img: 'https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=800&q=80' },
-      { id: 6, title: 'خلفية داكنة فخمة للموبايل', author: 'نور الهدى', type: 'premium', category: 'photos', img: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=800&q=80' }
-    ];
-
-    const galleryGrid = document.getElementById('galleryGrid');
-    const searchInput = document.getElementById('searchInput');
-    const categorySelect = document.getElementById('categorySelect');
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalAuthor = document.getElementById('modalAuthor');
-    const modalClose = document.getElementById('modalClose');
-
-    // 1. عرض العناصر في الشبكة
-    function renderGallery(items) {
-      galleryGrid.innerHTML = '';
-      if (items.length === 0) {
-        galleryGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem 0;">لم يتم العثور على نتائج تطلبها.</p>`;
-        return;
-      }
-
-      items.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'gallery-item';
-        card.innerHTML = `
-          <img src="${item.img}" alt="${item.title}">
-          <div class="item-overlay">
-            <span class="${item.type === 'premium' ? 'badge-premium' : 'badge-free'}">
-              ${item.type === 'premium' ? '<i class="fa-solid fa-crown"></i> الممتاز' : 'مجاني'}
-            </span>
-          </div>
-        `;
-
-        card.addEventListener('click', () => openModal(item));
-        galleryGrid.appendChild(card);
-      });
-    }
-
-    // 2. الفلترة والبحث
-    function filterGallery() {
-      const query = searchInput.value.toLowerCase().trim();
-      const selectedCat = categorySelect.value;
-
-      const filtered = galleryData.filter(item => {
-        const matchesSearch = item.title.toLowerCase().includes(query);
-        const matchesCat = (selectedCat === 'all' || item.category === selectedCat);
-        return matchesSearch && matchesCat;
-      });
-
-      renderGallery(filtered);
-    }
-
-    // 3. أزرار الفلترة العلوية (مجاني / ممتاز)
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-
-        const filterType = e.target.getAttribute('data-filter');
-        if (filterType === 'all') {
-          renderGallery(galleryData);
-        } else {
-          const filtered = galleryData.filter(item => item.type === filterType);
-          renderGallery(filtered);
-        }
-      });
-    }
-
-    // 4. التحكم بالمودال (Modal)
-    function openModal(item) {
-      modalImg.src = item.img;
-      modalTitle.textContent = item.title;
-      modalAuthor.textContent = item.author;
-      modal.classList.add('open');
-    }
-
-    modalClose.addEventListener('click', () => modal.classList.remove('open'));
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('open');
-    });
-
-    searchInput.addEventListener('input', filterGallery);
-    categorySelect.addEventListener('change', filterGallery);
-
-    // تشغيل العرض الابتدائي
-    renderGallery(galleryData);
-  </script>
+setLang(detect(),true);route();
+</script>
 </body>
 </html>
